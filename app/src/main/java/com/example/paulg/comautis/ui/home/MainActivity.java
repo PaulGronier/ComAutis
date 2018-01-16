@@ -11,9 +11,6 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements HomeView {
 
-    @Inject
-    HomePresenter mPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
