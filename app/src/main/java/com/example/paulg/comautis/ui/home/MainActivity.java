@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements HomeView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.list_child_add);
     }
 
     @Override
