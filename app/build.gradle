@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.paulg.comautis"
@@ -10,6 +12,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    dexOptions {
+        incremental false
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -18,9 +23,47 @@ android {
     }
 }
 
+
+
 dependencies {
+    final SUPPORT_VERSION = "26.1.0"
+    final RETROFIT_VERSION = "2.3.0"
+    final HOCKEY_VERSION = "4.1.5"
+    final BUTTERKNIFE_VERSION = "8.7.0"
+    final PARCELER_VERSION = "1.1.9"
+    final OKHTTP_VERSION = "3.8.1"
+    final GSON_VERSION = "2.2.4"
+    final EVENTBUS_VERSION = "3.0.0"
+    final MODSANDGEEK_VERSION = "2.0.3"
+    final BARCODE_VERSION = "1.9.7"
+    final DAGGER_VERSION = "2.11"
+    final MOCKITO_VERSION = "1.10.19"
+    final GOOGLE_SERVICES = "11.4.2"
+    final QRCODE_GENERATOR_VERSION = "1.0.0"
+    final CONSTRAINT_LAYOUT_VERSION = "1.0.2"
+    final GLIDE_VERSION = "3.8.0"
+    final ROOM_VERSION = "1.0.0"
+    final RXJAVA_VERSION = "2.0.1"
+
+    def daggerCompiler = "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    def butterknifeCompiler = "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
+
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+
+    implementation "com.android.support:cardview-v7:${SUPPORT_VERSION}"
+    implementation "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    implementation "com.android.support:design:${SUPPORT_VERSION}"
+    implementation "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
+    implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
+    implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
+
+    annotationProcessor butterknifeCompiler
+    annotationProcessor daggerCompiler
+    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
+
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
