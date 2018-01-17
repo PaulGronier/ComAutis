@@ -51,14 +51,9 @@ dependencies {
     implementation "com.android.support:cardview-v7:${SUPPORT_VERSION}"
     implementation "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     implementation "com.android.support:design:${SUPPORT_VERSION}"
-    implementation "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
-    compile "com.google.dagger:dagger-android:${DAGGER_VERSION}"
-    compile "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
+    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
 
     annotationProcessor butterknifeCompiler
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
-
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
