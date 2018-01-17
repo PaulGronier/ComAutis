@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
 import com.example.paulg.comautis.mvp.model.Child;
+import com.example.paulg.comautis.mvp.model.Model;
 import com.example.paulg.comautis.ui.Page.PageActivity;
 
 import java.util.ArrayList;
@@ -31,14 +32,15 @@ public class ChildActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_child_add);
-
+        getSupportActionBar().setTitle("Liste des enfants");
         initCompoment();
         addChildren();
         clickOnAChild();
+        deleteChild();
     }
+
     //TODO FloatingButton for add Child
      private void addChildren() {
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,11 +54,11 @@ public class ChildActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String nameChild = etNameChild.getText().toString();
                         if (nameChild != null && !nameChild.isEmpty()){
-                            /*
+
                                 Child child = new Child();
                                 child.setName(nameChild);
-                                Insert le nom dans la base de donnée
-                             */
+                                //Insert le nom dans la base de donnée
+
                             Toast.makeText(getApplicationContext(),"Enfant ajouté dans la base", Toast.LENGTH_SHORT).show();
                             // Méthode qui add l'enfant
                                 addChildInListView();
@@ -90,11 +92,49 @@ public class ChildActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteChild(){
+        mChildListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                LayoutInflater inflaterDeleteChild = getLayoutInflater();
+                View dialogDeleteLayout = inflaterDeleteChild.inflate(R.layout.dialog_delete_child, null);
+                AlertDialog.Builder mDeleteBuilder = new AlertDialog.Builder(ChildActivity.this);
+                mDeleteBuilder.setView(dialogDeleteLayout);
+                mDeleteBuilder.setPositiveButton(R.string.btn_ad_positive, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO
+                      // String idChildTarget = mListChild.get(position).getId();
+                      // if (checkPageInChild(idChildTarget) != 0){
+                      //     mLocalDb.deletePageByChild(idChildTarget, null);
+                      // }
+                      //  mLocalDb.deleteChildById(idChildTarget, null);
+                        Toast.makeText(getApplicationContext(), "Enfant supprimé",
+                                Toast.LENGTH_SHORT).show();
+                       // loadChild();
+                    }
+                });
+                mDeleteBuilder.setNegativeButton(R.string.btn_ad_negative, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(getApplicationContext(), "Annulé", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
+                return false;
+            }
+        });
+    }
+
+
     private void addChildInListView(){}
 
     private void initCompoment(){
         floatingActionButton = findViewById(R.id.add_child);
         mChildListView = findViewById(R.id.lv_child);
+        //init list view with list child items
+        AdapterListChild listChildAdapter = new AdapterListChild(mListChild, getBaseContext());
+        mChildListView.setAdapter(listChildAdapter);
     }
 
 }
