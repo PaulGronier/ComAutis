@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.model;
+package com.example.paulg.comautis.mvp.mvp.Model;
 
 /**
  * Created by iem on 16/01/2018.

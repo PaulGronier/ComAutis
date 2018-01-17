@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Child;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;

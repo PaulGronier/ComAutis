@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Child;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.model.page;
+package com.example.paulg.comautis.mvp.mvp.page;
 
 import android.content.Context;
 import android.view.LayoutInflater;
