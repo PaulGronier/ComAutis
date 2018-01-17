@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
 import com.example.paulg.comautis.mvp.model.Child;
-import com.example.paulg.comautis.mvp.model.Model;
-import com.example.paulg.comautis.ui.Page.PageActivity;
+import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,7 @@ public class ChildActivity extends AppCompatActivity {
         mChildListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getBaseContext(), PageActivity.class);
+                Intent intent = new Intent(getBaseContext(), ChoosePageActivity.class);
                 intent.putExtra(EXTRA_CHILD_ID, mListChild.get(position).getId());
                 startActivity(intent);
             }

@@ -6,22 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:id="@+id/child_pic"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_margin="5dp"
-        android:id="@+id/icon_child_list_item"
         android:src="@drawable/child_face"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"/>
 
     <TextView
-        android:id="@+id/tv_child_list_item"
+        android:id="@+id/tv_child_name"
         android:layout_width="164dp"
         android:layout_height="28dp"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_toEndOf="@+id/icon_child_list_item"
+        android:layout_toEndOf="@+id/child_pic"
         android:layout_toStartOf="@+id/icon_favorite_child"
         android:text="NomDeLEnfant"
         android:textSize="20sp"

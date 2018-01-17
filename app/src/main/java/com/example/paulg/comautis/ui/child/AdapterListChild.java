@@ -56,12 +56,12 @@ public class AdapterListChild extends BaseAdapter {
     private ConstraintLayout getConstraintLayoutWithInitView(int position, View view) {
         ConstraintLayout layout;
         if (view == null){
-            layout = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.activity_choose_child,null);
+            layout = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.list_child_add,null);
         }else {
             layout = (ConstraintLayout) view;
         }
 
-        childName = layout.findViewById(R.id.child_name);
+        childName = layout.findViewById(R.id.tv_child_name);
         childPic = layout.findViewById(R.id.child_pic);
         removeButton = layout.findViewById(R.id.remove_button);
         modifButton = layout.findViewById(R.id.modif_button);
