@@ -5,10 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.lpiem_lyon1.comautis.Models.Child;
-import com.lpiem_lyon1.comautis.Models.Folder;
-import com.lpiem_lyon1.comautis.Models.Page;
-import com.lpiem_lyon1.comautis.Models.Picture;
+
+import com.example.paulg.comautis.mvp.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Folder;
+import com.example.paulg.comautis.mvp.mvp.Model.Page;
+import com.example.paulg.comautis.mvp.mvp.Model.Picture;
 
 import java.util.ArrayList;
 import java.util.List;

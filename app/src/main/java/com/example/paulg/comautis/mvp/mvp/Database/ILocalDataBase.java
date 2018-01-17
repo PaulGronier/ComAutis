@@ -1,9 +1,10 @@
 package com.example.paulg.comautis.mvp.mvp.Database;
 
-import com.lpiem_lyon1.comautis.Models.Child;
-import com.lpiem_lyon1.comautis.Models.Folder;
-import com.lpiem_lyon1.comautis.Models.Page;
-import com.lpiem_lyon1.comautis.Models.Picture;
+
+import com.example.paulg.comautis.mvp.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Folder;
+import com.example.paulg.comautis.mvp.mvp.Model.Page;
+import com.example.paulg.comautis.mvp.mvp.Model.Picture;
 
 /**
  * Created by alexislp on 07/01/16.
