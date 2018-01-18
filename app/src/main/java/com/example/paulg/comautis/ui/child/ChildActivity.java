@@ -40,22 +40,23 @@ public class ChildActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_child_add);
-        getSupportActionBar().setTitle("Liste des enfants");
-
-        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
-
-        myDB = new SQLDataBase(getApplicationContext());
-        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
-        myDB.onCreate(mComAutisDB);
-
-        mLocalDb = new LocalDataBase(mComAutisDB,null);
-
-       
+        Database();
         initCompoment();
+        addChildInListView(); //loadChild
         addChildren();
         clickOnAChild();
         deleteChild();
+        getSupportActionBar().setTitle("Liste des enfants");
     }
+
+    private void Database() {
+        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
+        myDB = new SQLDataBase(getApplicationContext());
+        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
+        myDB.onCreate(mComAutisDB);
+        mLocalDb = new LocalDataBase(mComAutisDB,null);
+    }
+
 
     //TODO FloatingButton for add Child
      private void addChildren() {
@@ -187,4 +188,10 @@ public class ChildActivity extends AppCompatActivity {
         mChildListView.setAdapter(listChildAdapter);
     }
 
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        finish();
+    }
 }

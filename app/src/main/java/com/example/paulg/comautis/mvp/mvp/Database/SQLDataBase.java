@@ -30,7 +30,7 @@ public class SQLDataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < newVersion) {
+        if (oldVersion > newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + PictureTable.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + PageTable.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + ChildTable.TABLE_NAME);
