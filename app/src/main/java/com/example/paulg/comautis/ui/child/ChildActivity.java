@@ -42,7 +42,7 @@ public class ChildActivity extends AppCompatActivity {
         setContentView(R.layout.list_child_add);
         Database();
         initCompoment();
-        addChildInListView(); //loadChild
+        addChildInListView();
         addChildren();
         clickOnAChild();
         deleteChild();
