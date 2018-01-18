@@ -57,10 +57,12 @@ public class AdapterListChild extends BaseAdapter {
             childName = layout.findViewById(R.id.tv_child_name);
             childPic = layout.findViewById(R.id.child_pic);
             modifButton = layout.findViewById(R.id.modif_button);
+            deleteButton = layout.findViewById(R.id.deleteButton);
 
             childPic.setImageResource(R.drawable.child_face);
             childName.setText(mChild.get(position).getName());
             modifButton.setImageResource(R.drawable.modif);
+            deleteButton.setImageResource(R.drawable.delete);
         return layout;
     }
 }
