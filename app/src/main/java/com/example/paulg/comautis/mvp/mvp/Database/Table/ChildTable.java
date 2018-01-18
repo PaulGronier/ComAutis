@@ -1,14 +1,12 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.mvp.Database.Table;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.paulg.comautis.mvp.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Folder;
 
 
-/**
- * Created by alexislp on 06/01/16.
- */
 public class ChildTable extends AbstractTable<Child> {
 
     /**

@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.mvp.Database.Table;
 
 import android.content.ContentValues;
 import android.database.Cursor;

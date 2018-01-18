@@ -4,9 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by alexislp on 07/01/16.
- */
+import com.example.paulg.comautis.mvp.mvp.Database.Table.ChildTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.FolderTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.PageTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.PictureTable;
+
+
 public class SQLDataBase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "ComAutisDataBase";

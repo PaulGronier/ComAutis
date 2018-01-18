@@ -42,7 +42,7 @@ public class PagesAdapter extends ArrayAdapter <Page> {
         holder.mPagePictureView.setImageResource(R.drawable.ic_page);
         holder.mPageTitleView.setText(page.getTitle());
         holder.mModifButtonView.setImageResource(R.drawable.modif);
-        holder.mRemoveButtonView.setImageResource(R.drawable.ic_action_name);
+        holder.mRemoveButtonView.setImageResource(R.drawable.delete);
 
         return convertView;
     }

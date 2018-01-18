@@ -5,7 +5,6 @@ package com.example.paulg.comautis.mvp.mvp.Database;
  */
 
 
-
 import com.example.paulg.comautis.mvp.mvp.Model.Model;
 
 import java.util.List;

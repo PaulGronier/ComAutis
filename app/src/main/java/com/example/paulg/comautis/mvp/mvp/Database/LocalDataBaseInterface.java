@@ -1,6 +1,5 @@
 package com.example.paulg.comautis.mvp.mvp.Database;
 
-
 import com.example.paulg.comautis.mvp.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.mvp.Model.Folder;
 import com.example.paulg.comautis.mvp.mvp.Model.Page;
@@ -9,7 +8,7 @@ import com.example.paulg.comautis.mvp.mvp.Model.Picture;
 /**
  * Created by alexislp on 07/01/16.
  */
-public interface ILocalDataBase {
+public interface LocalDataBaseInterface {
 
     //region CHILD
     void requestChild(RequestCallback callback);

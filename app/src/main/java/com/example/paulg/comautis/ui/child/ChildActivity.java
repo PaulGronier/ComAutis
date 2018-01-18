@@ -3,6 +3,7 @@ package com.example.paulg.comautis.ui.child;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +15,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
+import com.example.paulg.comautis.mvp.mvp.Database.LocalDataBase;
+import com.example.paulg.comautis.mvp.mvp.Database.RequestCallback;
+import com.example.paulg.comautis.mvp.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.mvp.Model.Page;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;
@@ -27,11 +33,24 @@ public class ChildActivity extends AppCompatActivity {
     private ListView mChildListView;
     public static final String EXTRA_CHILD_ID = "child_id";
     private List<Child> mListChild = new ArrayList<Child>();
+    public SQLDataBase myDB;
+    public LocalDataBase mLocalDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_child_add);
         getSupportActionBar().setTitle("Liste des enfants");
+
+        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
+
+        myDB = new SQLDataBase(getApplicationContext());
+        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
+        myDB.onCreate(mComAutisDB);
+
+        mLocalDb = new LocalDataBase(mComAutisDB,null);
+
+       
         initCompoment();
         addChildren();
         clickOnAChild();
@@ -53,21 +72,18 @@ public class ChildActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String nameChild = etNameChild.getText().toString();
                         if (nameChild != null && !nameChild.isEmpty()){
-
-                                Child child = new Child();
-                                child.setName(nameChild);
-                                //Insert le nom dans la base de donnée
-
-                            Toast.makeText(getApplicationContext(),"Enfant ajouté dans la base", Toast.LENGTH_SHORT).show();
-                            // Méthode qui add l'enfant
-                                addChildInListView();
-
+                            Child myChild = new Child();
+                            myChild.setName(nameChild);
+                            mLocalDb.insertChild(myChild, null);
+                            Toast.makeText(getApplicationContext(), "Enfant ajouté à la base",
+                                    Toast.LENGTH_SHORT).show();
+                            addChildInListView();
                         } else {
                             Toast.makeText(getApplicationContext(), "Erreur", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                //if the user want to cancel the processu
+                //if the user want to cancel the process
                 mBuilder.setNegativeButton("Annuler", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -101,15 +117,15 @@ public class ChildActivity extends AppCompatActivity {
                 mDeleteBuilder.setView(dialogDeleteLayout);
                 mDeleteBuilder.setPositiveButton(R.string.btn_ad_positive, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO
-                      // String idChildTarget = mListChild.get(position).getId();
-                      // if (checkPageInChild(idChildTarget) != 0){
-                      //     mLocalDb.deletePageByChild(idChildTarget, null);
-                      // }
-                      //  mLocalDb.deleteChildById(idChildTarget, null);
+
+                        String idChildTarget = mListChild.get(position).getId();
+                        if (checkPageInChild(idChildTarget) != 0){
+                            mLocalDb.deletePageByChild(idChildTarget, null);
+                        }
+                        mLocalDb.deleteChildById(idChildTarget, null);
                         Toast.makeText(getApplicationContext(), "Enfant supprimé",
                                 Toast.LENGTH_SHORT).show();
-                       // loadChild();
+                        addChildInListView();
                     }
                 });
                 mDeleteBuilder.setNegativeButton(R.string.btn_ad_negative, new DialogInterface.OnClickListener() {
@@ -126,7 +142,42 @@ public class ChildActivity extends AppCompatActivity {
     }
 
 
-    private void addChildInListView(){}
+    private void addChildInListView(){
+        mLocalDb.requestChild(new RequestCallback() {
+            @Override
+            public void onResult(List<? extends Model> entities) {
+                mListChild.clear();
+                for (int i = 0; i < entities.size(); i++) {
+                    mListChild.add((Child) entities.get(i));
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
+
+        //init list view with list child items
+        AdapterListChild listChildAdapter = new AdapterListChild(mListChild, getBaseContext());
+        mChildListView.setAdapter(listChildAdapter);
+    }
+
+    private int checkPageInChild(String idChildTarget) {
+        List<Page> listPageInChild = new ArrayList<>();
+        mLocalDb.requestPageByChild(idChildTarget, new RequestCallback() {
+            @Override
+            public void onResult(List<? extends Model> entities) {
+                List listPageInChild = (List<Page>) entities;
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
+        return listPageInChild.size();
+    }
 
     private void initCompoment(){
         floatingActionButton = findViewById(R.id.add_child);

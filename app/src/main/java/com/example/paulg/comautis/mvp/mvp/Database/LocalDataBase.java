@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-
+import com.example.paulg.comautis.mvp.mvp.Database.Table.ChildTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.FolderTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.PageTable;
+import com.example.paulg.comautis.mvp.mvp.Database.Table.PictureTable;
 import com.example.paulg.comautis.mvp.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.mvp.Model.Folder;
 import com.example.paulg.comautis.mvp.mvp.Model.Page;
@@ -14,10 +17,8 @@ import com.example.paulg.comautis.mvp.mvp.Model.Picture;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alexislp on 07/01/16.
- */
-public class LocalDataBase implements ILocalDataBase {
+
+public class LocalDataBase implements LocalDataBaseInterface {
 
     private static final String TAG = LocalDataBase.class.getSimpleName();
 
