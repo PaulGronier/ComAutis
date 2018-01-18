@@ -1,8 +1,5 @@
-package com.example.paulg.comautis.mvp.mvp.Model;
+package com.example.paulg.comautis.mvp.Model;
 
-/**
- * Created by marcoloiodice on 06/01/2016.
- */
 public class DrawerItem {
 
     private String mName;

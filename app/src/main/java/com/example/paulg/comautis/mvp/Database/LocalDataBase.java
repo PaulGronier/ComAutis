@@ -1,18 +1,18 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.Database;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.paulg.comautis.mvp.mvp.Database.Table.ChildTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.FolderTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.PageTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.PictureTable;
-import com.example.paulg.comautis.mvp.mvp.Model.Child;
-import com.example.paulg.comautis.mvp.mvp.Model.Folder;
-import com.example.paulg.comautis.mvp.mvp.Model.Page;
-import com.example.paulg.comautis.mvp.mvp.Model.Picture;
+import com.example.paulg.comautis.mvp.Database.Table.ChildTable;
+import com.example.paulg.comautis.mvp.Database.Table.FolderTable;
+import com.example.paulg.comautis.mvp.Database.Table.PageTable;
+import com.example.paulg.comautis.mvp.Database.Table.PictureTable;
+import com.example.paulg.comautis.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.Model.Folder;
+import com.example.paulg.comautis.mvp.Model.Picture;
+import com.example.paulg.comautis.mvp.page.Page;
 
 import java.util.ArrayList;
 import java.util.List;

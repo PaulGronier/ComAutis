@@ -1,19 +1,28 @@
-package com.example.paulg.comautis.mvp.mvp.Model;
+package com.example.paulg.comautis.mvp.page;
 
 /**
- * Created by alexislp on 06/01/16.
+ * Created by paulg on 17/01/2018.
  */
+
+
+import com.example.paulg.comautis.mvp.Model.Model;
+
 public class Page extends Model {
-    private String mName;
+    private String title;
     private int mIsFavorite;
     private String mChildId;
 
-    public String getName() {
-        return mName;
+    public Page (String title) {
+        this.title = title;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int isFavorite() {

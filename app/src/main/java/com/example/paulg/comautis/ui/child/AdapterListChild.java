@@ -1,7 +1,6 @@
 package com.example.paulg.comautis.ui.child;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.Model.Child;
 
 import java.util.List;
 

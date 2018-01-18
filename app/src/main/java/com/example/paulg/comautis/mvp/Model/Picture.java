@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.mvp.Model;
+package com.example.paulg.comautis.mvp.Model;
 
 import android.graphics.Bitmap;
 

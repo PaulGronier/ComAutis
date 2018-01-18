@@ -1,11 +1,11 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.Database;
 
 /**
  * Created by alexislp on 07/01/16.
  */
 
 
-import com.example.paulg.comautis.mvp.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.Model.Model;
 
 import java.util.List;
 

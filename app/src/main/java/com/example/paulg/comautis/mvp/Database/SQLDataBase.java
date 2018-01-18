@@ -1,13 +1,13 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.paulg.comautis.mvp.mvp.Database.Table.ChildTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.FolderTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.PageTable;
-import com.example.paulg.comautis.mvp.mvp.Database.Table.PictureTable;
+import com.example.paulg.comautis.mvp.Database.Table.ChildTable;
+import com.example.paulg.comautis.mvp.Database.Table.FolderTable;
+import com.example.paulg.comautis.mvp.Database.Table.PageTable;
+import com.example.paulg.comautis.mvp.Database.Table.PictureTable;
 
 
 public class SQLDataBase extends SQLiteOpenHelper {

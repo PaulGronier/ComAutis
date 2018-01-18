@@ -1,9 +1,9 @@
-package com.example.paulg.comautis.mvp.mvp.Database.Table;
+package com.example.paulg.comautis.mvp.Database.Table;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.example.paulg.comautis.mvp.mvp.Model.Picture;
+import com.example.paulg.comautis.mvp.Model.Picture;
 
 
 public class PictureTable extends AbstractTable<Picture> {

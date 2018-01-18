@@ -9,8 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.mvp.Database.LocalDataBase;
-import com.example.paulg.comautis.mvp.mvp.Database.SQLDataBase;
+import com.example.paulg.comautis.mvp.Database.LocalDataBase;
+import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 
 public class MainActivity extends AppCompatActivity  {
     private ListView navigationView;

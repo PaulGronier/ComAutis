@@ -1,9 +1,9 @@
-package com.example.paulg.comautis.mvp.mvp.Database.Table;
+package com.example.paulg.comautis.mvp.Database.Table;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.example.paulg.comautis.mvp.mvp.Model.Page;
+import com.example.paulg.comautis.mvp.page.Page;
 
 
 /**
@@ -49,7 +49,7 @@ public class PageTable extends AbstractTable<Page> {
     public ContentValues getContentValues(Page object) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_ID, object.getId());
-        contentValues.put(KEY_NAME, object.getName());
+        contentValues.put(KEY_NAME, object.getTitle());
         contentValues.put(KEY_IS_FAVORITE, object.isFavorite());
         contentValues.put(KEY_CHILD_ID, object.getChildId());
         return contentValues;
@@ -62,9 +62,9 @@ public class PageTable extends AbstractTable<Page> {
 
     @Override
     public Page fromCursor(Cursor cursor) {
-        Page page = new Page();
+        Page page = new Page("pageTableTest");
         page.setId(cursor.getString(cursor.getColumnIndex(PageTable.KEY_ID)));
-        page.setName(cursor.getString(cursor.getColumnIndex(PageTable.KEY_NAME)));
+        page.setTitle(cursor.getString(cursor.getColumnIndex(PageTable.KEY_NAME)));
         page.setIsFavorite(cursor.getInt(cursor.getColumnIndex(PageTable.KEY_IS_FAVORITE)));
         page.setChildId(cursor.getString(cursor.getColumnIndex(PageTable.KEY_CHILD_ID)));
         return page;

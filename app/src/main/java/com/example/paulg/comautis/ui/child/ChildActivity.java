@@ -15,12 +15,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.mvp.Database.LocalDataBase;
-import com.example.paulg.comautis.mvp.mvp.Database.RequestCallback;
-import com.example.paulg.comautis.mvp.mvp.Database.SQLDataBase;
-import com.example.paulg.comautis.mvp.mvp.Model.Child;
-import com.example.paulg.comautis.mvp.mvp.Model.Model;
-import com.example.paulg.comautis.mvp.mvp.Model.Page;
+import com.example.paulg.comautis.mvp.Database.LocalDataBase;
+import com.example.paulg.comautis.mvp.Database.RequestCallback;
+import com.example.paulg.comautis.mvp.Database.SQLDataBase;
+import com.example.paulg.comautis.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.page.Page;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package com.example.paulg.comautis.mvp.mvp.Database;
+package com.example.paulg.comautis.mvp.Database;
 
-import com.example.paulg.comautis.mvp.mvp.Model.Child;
-import com.example.paulg.comautis.mvp.mvp.Model.Folder;
-import com.example.paulg.comautis.mvp.mvp.Model.Page;
-import com.example.paulg.comautis.mvp.mvp.Model.Picture;
+import com.example.paulg.comautis.mvp.Model.Child;
+import com.example.paulg.comautis.mvp.Model.Folder;
+import com.example.paulg.comautis.mvp.Model.Picture;
+import com.example.paulg.comautis.mvp.page.Page;
 
 /**
  * Created by alexislp on 07/01/16.

@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.model.page;
+package com.example.paulg.comautis.mvp.page;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -80,7 +80,7 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
             mPagePictureView.setImageResource(R.drawable.ic_page);
             mPageTitleView.setText(page.getTitle());
             mModifButtonView.setImageResource(R.drawable.modif);
-            mRemoveButtonView.setImageResource(R.drawable.ic_action_name);
+            mRemoveButtonView.setImageResource(R.drawable.delete);
 
             mModifButtonView.setOnClickListener(v -> mListener.onModifClickItem());
             mRemoveButtonView.setOnClickListener(v -> mListener.onRemoveClickItem());

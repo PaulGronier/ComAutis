@@ -1,8 +1,5 @@
-package com.example.paulg.comautis.mvp.mvp.Model;
+package com.example.paulg.comautis.mvp.Model;
 
-/**
- * Created by alexislp on 06/01/16.
- */
 public class Folder extends Model {
     private String mName;
     private int mIsFavorite;
