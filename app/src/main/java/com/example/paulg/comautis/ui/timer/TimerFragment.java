@@ -27,7 +27,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
     public static TimerFragment newInstance() { return new TimerFragment();
     }
 
-    private enum TimerStatus {
+    public enum TimerStatus {
         STARTED,
         STOPPED
     }
@@ -45,7 +45,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_timer, parent, false);
+        return inflater.inflate(R.layout.fragment_timer_tiny, parent, false);
     }
 
     // This event is triggered soon after onCreateView().
@@ -207,7 +207,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
      * method to set circular progress bar values
      */
     private void setProgressBarValues() {
-
         progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
         progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
     }

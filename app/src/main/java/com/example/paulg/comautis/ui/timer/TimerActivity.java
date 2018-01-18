@@ -15,7 +15,7 @@ public class TimerActivity extends AppCompatActivity {
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         // Replace the contents of the container with the new fragment
-        ft.replace(R.id.fragmentID, new TimerFragment());
+        ft.replace(R.id.fragmentID2, new TimerFragmentTiny());
         // or ft.add(R.id.your_placeholder, new FooFragment());
         // Complete the changes added above
         ft.commit();
