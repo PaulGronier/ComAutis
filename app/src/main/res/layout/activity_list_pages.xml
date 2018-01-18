@@ -13,10 +13,11 @@
         tools:context=".ChooseChildActivity"
         tools:showIn="@layout/item_page" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv_pages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        tools:visibility="visible"/>
 
 
     <android.support.design.widget.FloatingActionButton
