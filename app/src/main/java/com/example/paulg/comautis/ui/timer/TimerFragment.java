@@ -3,7 +3,6 @@ package com.example.paulg.comautis.ui.timer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,21 +43,19 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_timer);
-        initViews();
-        initListeners();
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        // Defines the xml file for the fragment
+        return inflater.inflate(R.layout.fragment_timer, parent, false);
     }
 
+    // This event is triggered soon after onCreateView().
+    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        Log.d("ERROR", "onCreateView");
-        Log.d("INFO", "Ini views & listeners");
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initViews();
         initListeners();
-        Log.d("INFO", "View initialised");
-        return inflater.inflate(R.layout.fragment_timer, parent, false);
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
     }
 
     @Override
