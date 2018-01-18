@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.page.ChoosePageActivity"></activity>
+
     </application>
 
 </manifest>

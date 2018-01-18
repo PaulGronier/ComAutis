@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/child_pic"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="5dp"
-        android:src="@drawable/child_face"
+        android:layout_width="59dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_margin="5dp"
+        android:src="@drawable/child_face" />
 
     <TextView
         android:id="@+id/tv_child_name"
@@ -20,33 +20,38 @@
         android:layout_height="28dp"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="50dp"
         android:layout_toEndOf="@+id/child_pic"
-        android:layout_toStartOf="@+id/icon_favorite_child"
+        android:layout_toStartOf="@+id/deleteButton"
         android:text="NomDeLEnfant"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/modif_page"
-        app:layout_constraintEnd_toStartOf="@+id/modif_page"
-        app:layout_constraintTop_toTopOf="@+id/icon_favorite_child" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/modif_button"
+        app:layout_constraintEnd_toStartOf="@+id/modif_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/child_pic"
+        app:layout_constraintTop_toTopOf="@+id/deleteButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/icon_favorite_child"
+        android:id="@+id/deleteButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="25dp"
-        android:src="@drawable/no_favorite"
+        android:src="@drawable/delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/modif_page"
+        android:id="@+id/modif_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="25dp"
         android:src="@drawable/modif"
-        app:layout_constraintBottom_toBottomOf="@+id/icon_favorite_child"
-        app:layout_constraintRight_toLeftOf="@+id/icon_favorite_child" />
+        app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
+        app:layout_constraintRight_toLeftOf="@+id/deleteButton" />
 
 
 </android.support.constraint.ConstraintLayout>

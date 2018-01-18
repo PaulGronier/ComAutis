@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.model.Child;
+import com.example.paulg.comautis.mvp.mvp.Model.Child;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class AdapterListChild extends BaseAdapter {
     List<Child> mChild;
     Context context;
     TextView childName;
-    ImageView childPic, removeButton, modifButton;
+    ImageView childPic, deleteButton, modifButton;
 
     public AdapterListChild(List<Child> mChild, Context context) {
         this.mChild = mChild;
@@ -48,28 +48,21 @@ public class AdapterListChild extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        ConstraintLayout layout = getConstraintLayoutWithInitView(position, view);
-        return layout;
-    }
-
-    @NonNull
-    private ConstraintLayout getConstraintLayoutWithInitView(int position, View view) {
         ConstraintLayout layout;
-        if (view == null){
-            layout = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.list_child_add,null);
+        if( view == null) {
+            layout = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.child_activity, null);
         }else {
             layout = (ConstraintLayout) view;
         }
+            childName = layout.findViewById(R.id.tv_child_name);
+            childPic = layout.findViewById(R.id.child_pic);
+            modifButton = layout.findViewById(R.id.modif_button);
+            deleteButton = layout.findViewById(R.id.deleteButton);
 
-        childName = layout.findViewById(R.id.tv_child_name);
-        childPic = layout.findViewById(R.id.child_pic);
-        removeButton = layout.findViewById(R.id.remove_button);
-        modifButton = layout.findViewById(R.id.modif_button);
-        childPic.setImageResource(R.drawable.child_face);
-        childName.setText(mChild.get(position).getName());
-        removeButton.setImageResource(R.drawable.ic_action_name);
-        modifButton.setImageResource(R.drawable.modif);
+            childPic.setImageResource(R.drawable.child_face);
+            childName.setText(mChild.get(position).getName());
+            modifButton.setImageResource(R.drawable.modif);
+            deleteButton.setImageResource(R.drawable.delete);
         return layout;
     }
-
 }

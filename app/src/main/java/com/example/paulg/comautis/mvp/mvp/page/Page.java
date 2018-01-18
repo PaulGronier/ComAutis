@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.mvp.model.page;
+package com.example.paulg.comautis.mvp.mvp.page;
 
 /**
  * Created by paulg on 17/01/2018.
