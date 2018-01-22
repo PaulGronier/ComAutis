@@ -169,4 +169,10 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         startActivity(intentName);
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intentName = new Intent(getBaseContext(), ChooseChildActivity.class);
+        startActivity(intentName);
+    }
 }
