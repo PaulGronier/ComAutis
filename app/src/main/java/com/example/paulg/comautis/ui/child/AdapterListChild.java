@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,9 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
     public interface onClickListenner{
 
         void onRemoveClickItem(String childID);
+        void onItemClick(String childID);
+
+
     }
 
     public class ChildHolder extends RecyclerView.ViewHolder{
@@ -80,7 +84,7 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
             modifButton.setImageResource(R.drawable.modif);
 
             deleteButton.setOnClickListener(view -> mListener.onRemoveClickItem(mChild.getId()));
-
+            childName.setOnClickListener(view -> mListener.onItemClick(mChild.getId()));
         }
     }
 }
