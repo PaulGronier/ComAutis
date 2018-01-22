@@ -27,10 +27,10 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/et_ad_child_name"
+        android:id="@+id/et_add_child_name"
         android:inputType="textPersonName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"

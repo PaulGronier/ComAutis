@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,11 +13,11 @@
         tools:context=".ChooseChildActivity"
         tools:showIn="@layout/item_page" />
 
-    <ListView
-        android:id="@+id/lv_child"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_child"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content"
+        tools:visibility="visible"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_child"
