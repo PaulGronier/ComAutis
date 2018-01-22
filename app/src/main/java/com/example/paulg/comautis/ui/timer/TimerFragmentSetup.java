@@ -1,5 +1,6 @@
 package com.example.paulg.comautis.ui.timer;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -17,17 +18,15 @@ import com.example.paulg.comautis.R;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by paulg on 16/01/2018.
+ * Created by Cervo on 22/01/2018.
  */
 
-public class TimerFragment extends Fragment implements View.OnClickListener {
+public class TimerFragmentSetup extends Fragment implements View.OnClickListener{
+
 
     private long timeCountInMilliSeconds = 1 * 60000;
 
-    public static TimerFragment newInstance() { return new TimerFragment();
-    }
-
-    public enum TimerStatus {
+    private enum TimerStatus {
         STARTED,
         STOPPED
     }
@@ -35,32 +34,29 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
     private TimerStatus timerStatus = TimerStatus.STOPPED;
 
     private ProgressBar progressBarCircle;
+    private TextView goBackButton;
     private EditText editTextMinute;
     private TextView textViewTime;
     private ImageView imageViewReset;
     private ImageView imageViewStartStop;
     private CountDownTimer countDownTimer;
+    private TimerInterface tmInterface;
+    private int time;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_timer_tiny, parent, false);
+        return inflater.inflate(R.layout.fragment_timer_setup, parent, false);
     }
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initViews();
         initListeners();
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     /**
@@ -68,6 +64,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
      */
     private void initViews() {
         progressBarCircle = (ProgressBar) getView().findViewById(R.id.progressBarCircle);
+        goBackButton = (TextView) getView().findViewById(R.id.goBack);
         editTextMinute = (EditText) getView().findViewById(R.id.editTextMinute);
         textViewTime = (TextView) getView().findViewById(R.id.textViewTime);
         imageViewReset = (ImageView) getView().findViewById(R.id.imageViewReset);
@@ -78,8 +75,10 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
      * method to initialize the click listeners
      */
     private void initListeners() {
+        goBackButton.setOnClickListener(this);
         imageViewReset.setOnClickListener(this);
         imageViewStartStop.setOnClickListener(this);
+
     }
 
     /**
@@ -96,8 +95,16 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
             case R.id.imageViewStartStop:
                 startStop();
                 break;
+            case R.id.goBack:
+                if (getFragmentManager().getBackStackEntryCount() == 0) {
+                    this.finish();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+                break;
         }
     }
+
 
     /**
      * method to reset count down timer
@@ -149,10 +156,11 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
      * method to initialize the values for count down timer
      */
     private void setTimerValues() {
-        int time = 0;
+        time = 0;
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
+            tmInterface.getTime(time);
         } else {
             // toast message to fill edit text
             Toast.makeText(getActivity(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
@@ -207,6 +215,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
      * method to set circular progress bar values
      */
     private void setProgressBarValues() {
+
         progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
         progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
     }
@@ -229,5 +238,10 @@ public class TimerFragment extends Fragment implements View.OnClickListener {
 
 
     }
+
+    public interface TimerInterface {
+        public void getTime(int time);
+    }
+
 
 }

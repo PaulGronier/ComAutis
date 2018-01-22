@@ -1,37 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+    android:id="@+id/fragment_timer_tiny_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <Button
-        android:text="Click"
-        android:id="@+id/myButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ProgressBar
-        android:id="@+id/barTimer"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_centerInParent="true"
-        android:progressDrawable="@drawable/drawable_circle_full" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_start"
-        android:id="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignEnd="@+id/barTimer"
-        android:text="Temps Restant"
-        android:textColor="#ffffff"/>
+<ImageView
+    android:id="@+id/imageCountdown"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
 </RelativeLayout>

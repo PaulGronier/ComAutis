@@ -1,23 +1,46 @@
 package com.example.paulg.comautis.ui.timer;
 
+import android.os.CountDownTimer;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.example.paulg.comautis.R;
 
-public class TimerActivity extends AppCompatActivity {
+public class TimerActivity extends AppCompatActivity implements TimerFragmentSetup.TimerInterface {
+
+    private TimerFragmentTiny simpleCountdown;
+    private TimerFragmentSetup detailsCountdown;
+    private FragmentTransaction fManager;
+    private CountDownTimer countDownTimer;
+    private int mTime;
+
+    public void iniComponents(){
+        detailsCountdown = new TimerFragmentSetup();
+        simpleCountdown = new TimerFragmentTiny();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // Replace the contents of the container with the new fragment
-        ft.replace(R.id.fragmentID2, new TimerFragmentTiny());
-        // or ft.add(R.id.your_placeholder, new FooFragment());
-        // Complete the changes added above
-        ft.commit();
+        iniComponents();
+        fManager = getSupportFragmentManager().beginTransaction();
+        if(true){
+            fManager.replace(R.id.fragmentSetup, detailsCountdown);
+        }
+//        else{
+//            fManager.replace(R.id.fragmentTiny, simpleCountdown);
+//        }
+        fManager.commit();
+//        detailsCountdown.getView().findViewById(R.id.imageViewStartStop).setOnClickListener(this);
+    }
+
+    @Override
+    public void getTime(int time) {
+        mTime = time;
     }
 }

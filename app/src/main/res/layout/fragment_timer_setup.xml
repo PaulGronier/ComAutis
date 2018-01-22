@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
+    <TextView
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/progressBarCircle"
+        android:text="Go back"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff" />
+
     <ProgressBar
         android:id="@+id/progressBarCircle"
         style="?android:attr/progressBarStyleHorizontal"

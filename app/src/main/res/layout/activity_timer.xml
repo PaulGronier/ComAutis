@@ -5,16 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<FrameLayout-->
-        <!--android:id="@+id/fragmentID"-->
-        <!--android:layout_width="238dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/fragmentID2"></FrameLayout>-->
-
     <FrameLayout
-        android:id="@+id/fragmentID2"
+        android:id="@+id/fragmentSetup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
