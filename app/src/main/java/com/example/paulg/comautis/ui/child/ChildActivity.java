@@ -91,8 +91,7 @@ public class ChildActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Ajout Annulé", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                AlertDialog alertDialog = mBuilder.show();
+                mBuilder.show();
             }
         });
     }
@@ -135,8 +134,7 @@ public class ChildActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Annulé", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
+                mDeleteBuilder.show();
                 return false;
             }
         });

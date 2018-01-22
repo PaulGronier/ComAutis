@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_header_ad_delete_child"
+            android:text="@string/dialog_delete_page_title"
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"/>
 
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/tv_ad_warning_delete"
-        android:text="@string/advertising_ad_delete_child"
+        android:text="@string/dialog_delete_page_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

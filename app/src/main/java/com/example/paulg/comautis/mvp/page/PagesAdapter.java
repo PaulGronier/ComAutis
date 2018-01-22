@@ -52,9 +52,9 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
     }
 
     public interface OnClickListener {
+        void onItemClick();
         void onModifClickItem();
-
-        void onRemoveClickItem();
+        void onRemoveClickItem(String pageId);
     }
 
     public class PagesHolder extends RecyclerView.ViewHolder {
@@ -82,8 +82,9 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
             mModifButtonView.setImageResource(R.drawable.modif);
             mRemoveButtonView.setImageResource(R.drawable.delete);
 
+            mView.setOnClickListener(v-> mListener.onItemClick());
             mModifButtonView.setOnClickListener(v -> mListener.onModifClickItem());
-            mRemoveButtonView.setOnClickListener(v -> mListener.onRemoveClickItem());
+            mRemoveButtonView.setOnClickListener(v -> mListener.onRemoveClickItem(page.getId()));
         }
     }
 }

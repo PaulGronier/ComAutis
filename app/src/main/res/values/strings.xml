@@ -14,8 +14,17 @@
     <string name="tv_header_ad_add_child">Ajouter un nouvel enfant</string>
     <string name="btn_ad_positive">Ok</string>
     <string name="btn_ad_negative">Annuler</string>
-    <string name="tv_header_ad_delete_child">Supprimer un enfant</string>
-    <string name="advertising_ad_delete_child">La suppression d enfant supprime également les pages qui lui sont associés. Etes-vous sur de vouloir continuer ?</string>
+    <string name="tv_header_ad_delete_child">Supprimer l\'enfant</string>
+    <string name="advertising_ad_delete_child">La suppression d\'enfant supprime également les pages qui lui sont associés. Êtes-vous sur de vouloir continuer ?</string>
+
+    <!-- Page List Activity and his dialog -->
+    <string name="tv_header_add_page">Ajouter une nouvelle page</string>
+    <string name="dialog_page_title">Titre de la page</string>
+    <string name="dialog_delete_page_title">Supprimer la page</string>
+    <string name="dialog_delete_page_ad">Êtes-vous sûr de vouloir supprimer cette page ?</string>
+
+
+
 
     <!-- Page List Activity and his dialog -->
     <string name="header_add_page">Ajouter une nouvelle page</string>

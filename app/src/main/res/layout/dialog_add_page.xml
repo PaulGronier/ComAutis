@@ -13,32 +13,32 @@
         <ImageView
             android:layout_width="@dimen/icon_item_size"
             android:layout_height="@dimen/icon_item_size"
-            android:src="@drawable/child_face"
+            android:src="@drawable/ic_page"
             android:layout_gravity="center_vertical"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_header_ad_add_child"
+            android:text="@string/tv_header_add_page"
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"/>
 
     </LinearLayout>
 
     <EditText
-        android:id="@+id/et_ad_child_name"
-        android:inputType="textPersonName"
+        android:id="@+id/et_ad_page_title"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="@string/child_name_information" />
+        android:hint="@string/dialog_page_title" />
 
     <Button
-        android:id="@+id/btn_ad_add_child"
+        android:id="@+id/btn_ad_add_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -46,7 +46,7 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/iv_photo_ad_add_child"
+        android:id="@+id/iv_photo_ad_add_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
