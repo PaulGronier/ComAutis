@@ -1,11 +1,11 @@
 package com.example.paulg.comautis.ui.child;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,54 +14,73 @@ import com.example.paulg.comautis.mvp.Model.Child;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by iem on 17/01/2018.
  */
 
-public class AdapterListChild extends BaseAdapter {
+public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.ChildHolder> {
 
-    List<Child> mChild;
-    Context context;
-    TextView childName;
-    ImageView childPic, deleteButton, modifButton;
+    private final Context mContext;
+    private final onClickListenner mListener;
+    private final List<Child> mChild;
 
-    public AdapterListChild(List<Child> mChild, Context context) {
-        this.mChild = mChild;
-        this.context = context;
+    public AdapterListChild(Context context, List<Child> child, onClickListenner listener) {
+        mContext = context;
+        mChild = child;
+        mListener = listener;
     }
 
     @Override
-    public int getCount() {
+    public ChildHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        view = LayoutInflater.from(mContext).inflate(R.layout.child_activity, parent, false);
+        return new ChildHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ChildHolder holder, int position) {
+        holder.bindButton(mChild.get(position));
+
+    }
+
+    @Override
+    public int getItemCount() {
         return mChild.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return null;
+
+    public interface onClickListenner{
+
+        void onRemoveClickItem(String childID);
     }
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
+    public class ChildHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        ConstraintLayout layout;
-        if( view == null) {
-            layout = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.child_activity, null);
-        }else {
-            layout = (ConstraintLayout) view;
+        @BindView(R.id.child_pic) ImageView childPic;
+        @BindView(R.id.tv_child_name) TextView childName;
+        @BindView(R.id.deleteButton) ImageView deleteButton;
+        @BindView(R.id.modif_button) ImageView modifButton;
+        View mView;
+
+        public ChildHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+
+            ButterKnife.bind(this, itemView);
         }
-            childName = layout.findViewById(R.id.tv_child_name);
-            childPic = layout.findViewById(R.id.child_pic);
-            modifButton = layout.findViewById(R.id.modif_button);
-            deleteButton = layout.findViewById(R.id.deleteButton);
+        public void bindButton(Child mChild){
 
             childPic.setImageResource(R.drawable.child_face);
-            childName.setText(mChild.get(position).getName());
-            modifButton.setImageResource(R.drawable.modif);
+            childName.setText(mChild.getName());
+            //childName.setText(mChild.get(position).getName());
             deleteButton.setImageResource(R.drawable.delete);
-        return layout;
+            modifButton.setImageResource(R.drawable.modif);
+
+            deleteButton.setOnClickListener(view -> mListener.onRemoveClickItem(mChild.getId()));
+
+        }
     }
 }

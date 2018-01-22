@@ -1,4 +1,4 @@
-package com.example.paulg.comautis.ui.child;
+/*package com.example.paulg.comautis.ui.child;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -192,4 +192,4 @@ public class ChildActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
-}
+}*/

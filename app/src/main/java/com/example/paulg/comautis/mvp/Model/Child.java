@@ -10,6 +10,7 @@ public class Child extends Model {
     private int mIsFavorite;
     private String mFolderId;
 
+
     public String getName() {
         return mName;
     }
