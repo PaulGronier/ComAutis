@@ -25,6 +25,7 @@ import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.page.Page;
 import com.example.paulg.comautis.mvp.page.PagesAdapter;
 import com.example.paulg.comautis.ui.child.AdapterListChild;
+import com.example.paulg.comautis.ui.child.ChooseChildActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
 
     private List<Page> mListPages;
     private PagesAdapter mPagesAdapter;
-
+    String childId;
     public SQLDataBase myDB;
     public LocalDataBase mLocalDb;
 
@@ -67,7 +68,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         addPage();
         //String childName = (String) savedInstanceState.getSerializable("child_id");
         //getSupportActionBar().setTitle("Pages de "+ childName);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -162,4 +163,10 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent intentName = new Intent(getBaseContext(), ChooseChildActivity.class);
+        startActivity(intentName);
+        return true;
+    }
 }
