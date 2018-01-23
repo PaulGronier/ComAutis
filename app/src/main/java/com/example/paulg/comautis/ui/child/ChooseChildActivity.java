@@ -73,8 +73,7 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         mDeleteBuilder.setView(dialogDeletelayout);
         mDeleteBuilder.setPositiveButton(R.string.btn_ad_positive, (dialog, which) -> {
             String idChildToDelete = childID;
-            mLocalDb.deleteChildById(idChildToDelete, null);
-
+                mLocalDb.deleteChildById(idChildToDelete, null);
             Toast.makeText(getApplicationContext(), "Enfant supprimée",
                     Toast.LENGTH_SHORT).show();
             addChildInListView();

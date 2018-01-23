@@ -1,18 +1,15 @@
 package com.example.paulg.comautis.ui.page;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,7 +21,6 @@ import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.page.Page;
 import com.example.paulg.comautis.mvp.page.PagesAdapter;
-import com.example.paulg.comautis.ui.child.AdapterListChild;
 import com.example.paulg.comautis.ui.child.ChooseChildActivity;
 
 import java.util.ArrayList;
@@ -47,27 +43,25 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
 
     EditText mEditDialogText;
 
-    public static final String EXTRA_PAGE_ID = "page_id";
-
+    List<Child> mListChild;
     private List<Page> mListPages;
     private PagesAdapter mPagesAdapter;
-    String childId;
     public SQLDataBase myDB;
     public LocalDataBase mLocalDb;
-
+    public String childId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_pages);
-
+        mListChild = new ArrayList<Child>();
         initDatabase();
         ButterKnife.bind(this);
         init();
         addPageInRecyclerView();
         addPage();
-        //String childName = (String) savedInstanceState.getSerializable("child_id");
-        //getSupportActionBar().setTitle("Pages de "+ childName);
+
+        getSupportActionBar().setTitle("Choisissez une page : ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -106,6 +100,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         mListPagesView.setAdapter(mPagesAdapter);
         mListPagesView.setLayoutManager(new LinearLayoutManager(this));
         mListPagesView.setVisibility(View.VISIBLE);
+
     }
 
     private void initDatabase() {
@@ -145,22 +140,48 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
             mBuilder.setView(dialogAddPage);
             mEditDialogText = dialogAddPage.findViewById(R.id.et_ad_page_title);
             mBuilder.setPositiveButton("Ok", (dialogInterface, i) -> {
+
                 String pageTitle = mEditDialogText.getText().toString();
                 if (pageTitle != null && !pageTitle.isEmpty()){
                     Page mPage = new Page(pageTitle);
-                    mLocalDb.insertPage(mPage, null);
+                    mPage.setChildId(childId);
+                    long id = mLocalDb.insertPage(mPage, null);
+                    mPage.setId(Long.toString(id));
                     Toast.makeText(getApplicationContext(), "Page ajoutée à la base",
                             Toast.LENGTH_SHORT).show();
                     addPageInRecyclerView();
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Erreur d'ajout page", Toast.LENGTH_SHORT).show();
                 }
             });
             //if the user want to cancel the process
             mBuilder.setNegativeButton("Annuler", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "Ajout Annulé", Toast.LENGTH_SHORT).show());
-
             mBuilder.show();
+
         });
+    }
+
+    private void loadPages(){
+        mLocalDb.requestPageByChild(childId,new RequestCallback() {
+            @Override
+            public void onResult(List<? extends Model> entities) {
+                mListPages.clear();
+                for (int i = 0; i < entities.size(); i++) {
+                    mListPages.add((Page) entities.get(i));
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
+
+        //init list view with list pages items
+        PagesAdapter listPageAdapter = new PagesAdapter(this, mListPages, null);
+        mListPagesView.setAdapter(listPageAdapter);
+
     }
 
     @Override
