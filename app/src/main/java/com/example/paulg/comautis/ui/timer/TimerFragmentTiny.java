@@ -83,7 +83,7 @@ public class TimerFragmentTiny extends Fragment {
     }
 
     public void refreshTime(long time) {
-        timeCountInMilliSeconds = time * 1000;
+        timeCountInMilliSeconds = time;
         mTimeView.setText(String.valueOf(time));
         startCountDownTimer();
 
