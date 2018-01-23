@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_folder"
+        android:enabled="true"
+        android:icon="@drawable/ic_folder"
+        android:title="Folder"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_child"
+        android:enabled="true"
+        android:icon="@drawable/child_face"
+        android:title="Enfants"
+        app:showAsAction="ifRoom" />
+</menu>

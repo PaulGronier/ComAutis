@@ -25,7 +25,9 @@ android {
     }
 }
 
-
+ext {
+    supportLibVersion = '26.1.0'  // variable that can be referenced to keep support libs consistent
+}
 
 dependencies {
     final SUPPORT_VERSION = "26.1.0"

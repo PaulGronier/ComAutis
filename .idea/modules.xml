@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ComAutis.iml" filepath="$PROJECT_DIR$/ComAutis.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ComAutis-master.iml" filepath="$PROJECT_DIR$/ComAutis-master.iml" />
+      <module fileurl="file://C:\Users\Cervo\Documents\DEV\ComAutis\ComAutis-master.iml" filepath="C:\Users\Cervo\Documents\DEV\ComAutis\ComAutis-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

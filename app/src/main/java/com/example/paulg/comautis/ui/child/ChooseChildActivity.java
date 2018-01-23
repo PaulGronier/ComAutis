@@ -23,6 +23,7 @@ import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.page.Page;
+import com.example.paulg.comautis.ui.home.BaseActivity;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by iem on 19/01/2018.
  */
 
-public class ChooseChildActivity extends AppCompatActivity implements AdapterListChild.onClickListenner{
+public class ChooseChildActivity extends BaseActivity implements AdapterListChild.onClickListenner{
 
     public static final String EXTRA_CHILD_ID = "child_id";
 
@@ -174,10 +175,14 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         });
         return listPageInChild.size();
     }
-    @Override
-    protected void onPause() {
 
-        super.onPause();
-        finish();
+    @Override
+    public int getContentViewId() {
+        return R.layout.list_child_add;
+    }
+
+    @Override
+    public int getNavigationMenuItemId() {
+        return R.id.action_child;
     }
 }
