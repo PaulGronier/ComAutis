@@ -22,6 +22,7 @@ import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.page.Page;
 import com.example.paulg.comautis.mvp.page.PagesAdapter;
 import com.example.paulg.comautis.ui.child.ChooseChildActivity;
+import com.example.paulg.comautis.ui.timer.TimerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,26 +49,36 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
     private PagesAdapter mPagesAdapter;
     public SQLDataBase myDB;
     public LocalDataBase mLocalDb;
-    public String childId;
+    public String mChildId;
+    public String mChildName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_pages);
-        mListChild = new ArrayList<Child>();
+        mListChild = new ArrayList<>();
+        if(getIntent() != null){
+            if(getIntent().getExtras() != null) {
+                mChildId = getIntent().getExtras().getString(ChooseChildActivity.EXTRA_CHILD_ID);
+                mChildName = getIntent().getExtras().getString(ChooseChildActivity.EXTRA_CHILD_NAME);
+            }
+        }
         initDatabase();
         ButterKnife.bind(this);
         init();
         addPageInRecyclerView();
-        addPage();
-
-        getSupportActionBar().setTitle("Choisissez une page : ");
+        initAddPageButton();
+        loadPages();
+        getSupportActionBar().setTitle("Pages de " + mChildName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public void onItemClick() {
         Toast.makeText(this, "ItemClick", Toast.LENGTH_SHORT).show();
+        Intent intentName = new Intent(getBaseContext(), TimerActivity.class);
+
+        startActivity(intentName);
     }
 
     @Override
@@ -91,7 +102,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         });
         mDeleteBuilder.setNegativeButton(R.string.btn_ad_negative, (dialog, which) -> Toast.makeText(getApplicationContext(), "Annulé", Toast.LENGTH_SHORT).show());
 
-        AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
+        mDeleteBuilder.show();
     }
 
     private void init() {
@@ -112,7 +123,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
     }
 
     private void addPageInRecyclerView(){
-        mLocalDb.requestPage(new RequestCallback() {
+        mLocalDb.requestPageByChild(mChildId, new RequestCallback() {
             @Override
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
@@ -132,7 +143,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         mListPagesView.setAdapter(mPagesAdapter);
     }
 
-    private void addPage() {
+    private void initAddPageButton() {
         mFloatingActionButton.setOnClickListener(view -> {
             LayoutInflater inflaterAddChildren = getLayoutInflater();
             View dialogAddPage = inflaterAddChildren.inflate(R.layout.dialog_add_page, null);
@@ -144,7 +155,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
                 String pageTitle = mEditDialogText.getText().toString();
                 if (pageTitle != null && !pageTitle.isEmpty()){
                     Page mPage = new Page(pageTitle);
-                    mPage.setChildId(childId);
+                    mPage.setChildId(mChildId);
                     long id = mLocalDb.insertPage(mPage, null);
                     mPage.setId(Long.toString(id));
                     Toast.makeText(getApplicationContext(), "Page ajoutée à la base",
@@ -163,7 +174,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
     }
 
     private void loadPages(){
-        mLocalDb.requestPageByChild(childId,new RequestCallback() {
+        mLocalDb.requestPageByChild(mChildId,new RequestCallback() {
             @Override
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
@@ -179,21 +190,23 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
         });
 
         //init list view with list pages items
-        PagesAdapter listPageAdapter = new PagesAdapter(this, mListPages, null);
-        mListPagesView.setAdapter(listPageAdapter);
+        //PagesAdapter listPageAdapter = new PagesAdapter(this, mListPages, null);
+        mPagesAdapter.notifyDataSetChanged();
+        mListPagesView.setAdapter(mPagesAdapter);
 
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent intentName = new Intent(getBaseContext(), ChooseChildActivity.class);
-        startActivity(intentName);
+        finish();
+        overridePendingTransition(R.anim.anim_slide_none, R.anim.anim_slide_down);
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        Intent intentName = new Intent(getBaseContext(), ChooseChildActivity.class);
-        startActivity(intentName);
+        finish();
+        overridePendingTransition(R.anim.anim_slide_none, R.anim.anim_slide_down);
     }
+
 }

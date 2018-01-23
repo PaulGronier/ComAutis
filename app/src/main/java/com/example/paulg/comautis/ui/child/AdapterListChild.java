@@ -54,7 +54,7 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
     public interface onClickListenner{
 
         void onRemoveClickItem(String childID);
-        void onItemClick(String childID);
+        void onItemClick(String childID, String name);
 
 
     }
@@ -80,8 +80,8 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
             deleteButton.setImageResource(R.drawable.delete);
             modifButton.setImageResource(R.drawable.modif);
 
+            mView.setOnClickListener(view -> mListener.onItemClick(mChild.getId(), mChild.getName()));
             deleteButton.setOnClickListener(view -> mListener.onRemoveClickItem(mChild.getId()));
-            childName.setOnClickListener(view -> mListener.onItemClick(mChild.getId()));
         }
     }
 }

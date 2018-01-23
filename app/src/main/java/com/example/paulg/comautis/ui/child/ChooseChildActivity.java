@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,6 +37,8 @@ import butterknife.ButterKnife;
 public class ChooseChildActivity extends AppCompatActivity implements AdapterListChild.onClickListenner{
 
     public static final String EXTRA_CHILD_ID = "child_id";
+    public static final String EXTRA_CHILD_NAME = "child_name";
+
 
     @BindView(R.id.rv_child) RecyclerView mChildRecyclerView;
     private List<Child> mListChild;
@@ -84,9 +85,10 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
     }
     @Override
-    public void onItemClick ( String childID) {
+    public void onItemClick(String childID, String name) {
         Intent intentName = new Intent(getBaseContext(), ChoosePageActivity.class);
         intentName.putExtra(EXTRA_CHILD_ID, childID);
+        intentName.putExtra(EXTRA_CHILD_NAME, name);
         startActivity(intentName);
     }
 
@@ -173,11 +175,5 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
             }
         });
         return listPageInChild.size();
-    }
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-        finish();
     }
 }

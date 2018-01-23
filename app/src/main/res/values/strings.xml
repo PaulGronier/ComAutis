@@ -20,7 +20,7 @@
     <string name="btn_ad_positive">Ok</string>
     <string name="btn_ad_negative">Annuler</string>
     <string name="tv_header_ad_delete_child">Supprimer l\'enfant</string>
-    <string name="advertising_ad_delete_child">La suppression d\'enfant supprime également les pages qui lui sont associés. Êtes-vous sur de vouloir continuer ?</string>
+    <string name="advertising_ad_delete_child">La suppression d\'enfant supprime également ses pages. Êtes-vous sur de vouloir continuer ?</string>
 
     <!-- Page List Activity and his dialog -->
     <string name="tv_header_add_page">Ajouter une nouvelle page</string>

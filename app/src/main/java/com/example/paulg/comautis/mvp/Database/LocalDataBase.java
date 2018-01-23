@@ -337,7 +337,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
                 callback.onResult(pageList);
         }
         if (callback != null) {
-            callback.onError(new IllegalArgumentException("childId is null"));
+            callback.onError(new IllegalArgumentException("mChildId is null"));
         }
     }
 

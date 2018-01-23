@@ -72,6 +72,7 @@ public class TimerActivity extends AppCompatActivity implements TimerFragmentSet
     public void showTinyTimerFragment() {
         displayTinyFragment();
             //tinyFragment = (TimerFragmentTiny)getSupportFragmentManager().findFragmentById(R.id.my_placeholder);
-            tinyFragment.refreshTime(mTime);
+        //tinyFragment.refreshTime(mTime);
+
     }
 }

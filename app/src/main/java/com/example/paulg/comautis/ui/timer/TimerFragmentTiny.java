@@ -101,7 +101,7 @@ public class TimerFragmentTiny extends Fragment {
                 bitmap = timerGraphic.redrawTimer(bitmap,angleforsec);
                 image.setImageBitmap(bitmap);
 
-                Log.d("INFO", "angle : " + angleforsec);
+                //Log.d("INFO", "angle : " + angleforsec);
 
             }
 
