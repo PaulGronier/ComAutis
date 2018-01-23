@@ -1,7 +1,6 @@
 package com.example.paulg.comautis.ui.child;
 
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +54,9 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
     public interface onClickListenner{
 
         void onRemoveClickItem(String childID);
+        void onItemClick(String childID);
+
+
     }
 
     public class ChildHolder extends RecyclerView.ViewHolder{
@@ -75,12 +77,11 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
 
             childPic.setImageResource(R.drawable.child_face);
             childName.setText(mChild.getName());
-            //childName.setText(mChild.get(position).getName());
             deleteButton.setImageResource(R.drawable.delete);
             modifButton.setImageResource(R.drawable.modif);
 
             deleteButton.setOnClickListener(view -> mListener.onRemoveClickItem(mChild.getId()));
-
+            childName.setOnClickListener(view -> mListener.onItemClick(mChild.getId()));
         }
     }
 }

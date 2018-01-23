@@ -2,6 +2,7 @@ package com.example.paulg.comautis.ui.child;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.page.Page;
+import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +37,9 @@ import butterknife.ButterKnife;
 
 public class ChooseChildActivity extends AppCompatActivity implements AdapterListChild.onClickListenner{
 
-    @BindView(R.id.rv_child) RecyclerView mChildRecyclerView;
+    public static final String EXTRA_CHILD_ID = "child_id";
 
+    @BindView(R.id.rv_child) RecyclerView mChildRecyclerView;
     private List<Child> mListChild;
     AdapterListChild mAdapterListChild;
     EditText editNameChild;
@@ -57,6 +61,8 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         init();
         addChildInListView();
         addChildren();
+
+
     }
 
     @Override
@@ -67,8 +73,7 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         mDeleteBuilder.setView(dialogDeletelayout);
         mDeleteBuilder.setPositiveButton(R.string.btn_ad_positive, (dialog, which) -> {
             String idChildToDelete = childID;
-            mLocalDb.deleteChildById(idChildToDelete, null);
-
+                mLocalDb.deleteChildById(idChildToDelete, null);
             Toast.makeText(getApplicationContext(), "Enfant supprimée",
                     Toast.LENGTH_SHORT).show();
             addChildInListView();
@@ -77,9 +82,12 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
                 (dialog, which) -> Toast.makeText(getApplicationContext(), "Annulé",
                         Toast.LENGTH_SHORT).show());
         AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
-
-
-
+    }
+    @Override
+    public void onItemClick ( String childID) {
+        Intent intentName = new Intent(getBaseContext(), ChoosePageActivity.class);
+        intentName.putExtra(EXTRA_CHILD_ID, childID);
+        startActivity(intentName);
     }
 
     private void addChildren() {
@@ -115,7 +123,7 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
     }
 
     private void init() {
-        mListChild = new ArrayList<>();
+        mListChild = new ArrayList<Child>();
         mAdapterListChild = new AdapterListChild(this, mListChild, this);
         mChildRecyclerView.setAdapter(mAdapterListChild);
         mChildRecyclerView.setLayoutManager(new LinearLayoutManager(this));
