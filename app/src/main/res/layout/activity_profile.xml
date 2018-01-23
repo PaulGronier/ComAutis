@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/img_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/family_name_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="Nom de famille"
+        app:layout_constraintLeft_toRightOf="@id/img_child"
+        app:layout_constraintTop_toTopOf="@id/img_child"
+        />
+
+    <TextView
+        android:id="@+id/name_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prénom"
+        app:layout_constraintTop_toBottomOf="@id/family_name_child"
+        app:layout_constraintLeft_toLeftOf="@id/family_name_child"
+        />
+
+    <TextView
+        android:id="@+id/years_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        app:layout_constraintLeft_toLeftOf="@id/name_child"
+        app:layout_constraintTop_toBottomOf="@id/name_child"
+        />
+
+</android.support.constraint.ConstraintLayout>

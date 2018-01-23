@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ComAutis</string>
+    <string name="hint_minute">Minute</string>
+    <string name="message_minutes">Please Enter Minutes...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_base">BaseActivity</string>
 
     <!-- Drawer items -->
