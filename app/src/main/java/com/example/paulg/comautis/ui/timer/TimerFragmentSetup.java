@@ -136,7 +136,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
      */
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
-            mIsStopped = true;
+            mIsStopped = false;
             // call to initialize the timer values
             setTimerValues();
             // call to initialize the progress bar values
@@ -153,7 +153,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
             startCountDownTimer();
 
         } else {
-            mIsStopped = false;
+            mIsStopped = true;
             // hiding the reset icon
             imageViewReset.setVisibility(View.GONE);
             // changing stop icon to start icon
@@ -190,6 +190,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeCountInMilliSeconds = millisUntilFinished;
+                mIsStopped = false;
                 timerListener.getTime(millisUntilFinished, mIsStopped);
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
@@ -197,7 +198,8 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
 
             @Override
             public void onFinish() {
-
+                mIsStopped = true;
+                timerListener.getTime(0, true);
                 textViewTime.setText(hmsTimeFormatter(mTimeCountInMilliSeconds));
                 // call to initialize the progress bar values
                 setProgressBarValues();

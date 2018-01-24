@@ -66,6 +66,7 @@ public class ShowPicturesTimerActivity extends BaseActivity implements TimerFrag
     public void getTime(long time, boolean isStoped) {
         mIsStopped = isStoped;
         mTime = time;
+        tinyFragment.refreshTime(mTime);
     }
 
     @Override
@@ -78,8 +79,5 @@ public class ShowPicturesTimerActivity extends BaseActivity implements TimerFrag
     public void showTinyTimerFragment() {
         displayTinyFragment();
             //tinyFragment = (TimerFragmentTiny)getSupportFragmentManager().findFragmentById(R.id.my_placeholder);
-        if (mIsStopped) {
-            tinyFragment.refreshTime(mTime);
-        }
     }
 }

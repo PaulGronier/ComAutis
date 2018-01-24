@@ -7,13 +7,16 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.util.Log;
+
 /**
  * Created by Cervo on 23/01/2018.
  */
 
 public class TimerGraphic {
 
-    private static final float startAngle = -90f; //Angle de départ
+    private float startAngle;
+    private static final float angleForSec = 0.1f;//Angle de départ
     private static final int radius = 100;   // centre
     private int iterator = 0;
     private int left;
@@ -39,7 +42,7 @@ public class TimerGraphic {
 
         // dessin arc externe
         RectF oval = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
-        canvas.drawArc(oval, startAngle, 360, true, paint);
+        canvas.drawArc(oval, -90f, 360, true, paint);
 
         // dessin arc interne
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
@@ -48,11 +51,11 @@ public class TimerGraphic {
         int right = (canvas.getWidth() / 2) + radius;
         int bottom = (canvas.getHeight() / 2) + radius;
         oval = new RectF(left, top , right, bottom);
-        canvas.drawArc(oval, startAngle, 360, true, paint);
+        canvas.drawArc(oval, -90f, 360f, true, paint);
         return bitmap;
     }
 
-    public Bitmap redrawTimer(Bitmap b, double sweepAngle){
+    public Bitmap redrawTimer(Bitmap b, double startAngle){
 
         canvas = new Canvas(b);
 
@@ -63,7 +66,8 @@ public class TimerGraphic {
 
         // dessin arc externe
         RectF oval = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
-        canvas.drawArc(oval, -90f, (long)(sweepAngle*iterator), true, paint);
+        canvas.drawArc(oval, -90f, (long)(startAngle+(angleForSec*iterator)), true, paint);
+        Log.d("infoPUUTAIN", String.valueOf(startAngle+(angleForSec*iterator)));
 
         iterator++;
         return b;

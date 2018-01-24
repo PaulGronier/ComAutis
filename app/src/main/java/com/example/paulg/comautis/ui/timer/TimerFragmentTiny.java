@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -34,6 +37,8 @@ public class TimerFragmentTiny extends Fragment {
     private FragmentActivity listener;
     private TimerGraphic timerGraphic;
     private long mTimeCountInMilliSeconds;
+    private Handler mHandler;
+
 
     @Override
     public void onAttach(Context context) {
@@ -74,7 +79,19 @@ public class TimerFragmentTiny extends Fragment {
     public void refreshTime(long time) {
         mTimeCountInMilliSeconds = time;
         mTimeView.setText(String.valueOf(time));
-        startCountDownTimer();
+        //startCountDownTimer();
+        refreshTinyTimer(time);
+    }
+
+    public void refreshTinyTimer (long milliSeconds) {
+
+        double startAngle = milliSeconds*1000*360/3600;
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        //long tempstotal = milliSeconds /1000;
+        //double angleforsec = 360.00 / tempstotal / 2.00;
+        bitmap = timerGraphic.redrawTimer(bitmap,startAngle);
+        image.setImageBitmap(bitmap);
+
     }
 
     private void startCountDownTimer() {
