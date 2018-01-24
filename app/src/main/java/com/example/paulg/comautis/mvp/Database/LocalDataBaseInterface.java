@@ -3,6 +3,7 @@ package com.example.paulg.comautis.mvp.Database;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Folder;
 import com.example.paulg.comautis.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.Model.Page;
 import com.example.paulg.comautis.mvp.Model.Picture;
 
 /**
@@ -48,7 +49,7 @@ public interface LocalDataBaseInterface {
     void requestPageByName(String name, RequestCallback callback);
     void requestPageByChild(String childId, RequestCallback callback);
 
-    long insertPage(Model.Page page, RequestCallback callback);
+    long insertPage(Page page, RequestCallback callback);
 
     void deletePageById(String id, RequestCallback callback);
 

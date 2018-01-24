@@ -15,7 +15,7 @@ import java.io.IOException;
 public class PictureUtils {
 
     public static void createPictureDirectory(){
-        String folder_pictures = "ComAutisPictures";
+        String folder_pictures = "ComAutis";
 
         //File dir = new File(Environment.DIRECTORY_PICTURES, folder_pictures);
         //if (!dir.exists()){

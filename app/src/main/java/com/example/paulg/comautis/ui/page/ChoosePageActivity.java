@@ -2,10 +2,8 @@ package com.example.paulg.comautis.ui.page;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.Database.LocalDataBase;
 import com.example.paulg.comautis.mvp.Database.RequestCallback;
-import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.Model.Page;
 import com.example.paulg.comautis.mvp.page.PagesAdapter;
 import com.example.paulg.comautis.ui.BaseActivity;
 import com.example.paulg.comautis.ui.child.ChooseChildActivity;
+import com.example.paulg.comautis.ui.picture.ChoosePictureActivity;
 import com.example.paulg.comautis.ui.timer.ShowPicturesTimerActivity;
 
 import java.util.ArrayList;
@@ -41,13 +39,12 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
     @BindView(R.id.lv_pages)
     RecyclerView mListPagesView;
 
-    @BindView(R.id.add_page_button)
-    FloatingActionButton mFloatingActionButton;
+    private FloatingActionButton mFloatingActionButton;
 
     EditText mEditDialogText;
 
     List<Child> mListChild;
-    private List<Model.Page> mListPages;
+    private List<Page> mListPages;
     private PagesAdapter mPagesAdapter;
     public String mChildId;
     public String mChildName;
@@ -56,6 +53,7 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_pages);
+        mFloatingActionButton = findViewById(R.id.add_page_button);
         mListChild = new ArrayList<>();
         if(getIntent() != null){
             if(getIntent().getExtras() != null) {
@@ -120,7 +118,7 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
                 for (int i = 0; i < entities.size(); i++) {
-                    mListPages.add((Model.Page) entities.get(i));
+                    mListPages.add((Page) entities.get(i));
                 }
             }
 
@@ -135,25 +133,28 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
         mListPagesView.setAdapter(mPagesAdapter);
     }
 
-    private void initAddPageButton() {
+    public void initAddPageButton() {
         mFloatingActionButton.setOnClickListener(view -> {
-            LayoutInflater inflaterAddChildren = getLayoutInflater();
-            View dialogAddPage = inflaterAddChildren.inflate(R.layout.dialog_add_page, null);
+            LayoutInflater inflaterAddPage = getLayoutInflater();
+            View dialogAddPage = inflaterAddPage.inflate(R.layout.dialog_add_page, null);
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ChoosePageActivity.this);
             mBuilder.setView(dialogAddPage);
             mEditDialogText = dialogAddPage.findViewById(R.id.et_ad_page_title);
             mBuilder.setPositiveButton("Ok", (dialogInterface, i) -> {
 
                 String pageTitle = mEditDialogText.getText().toString();
-                if (pageTitle != null && !pageTitle.isEmpty()){
-                    Model.Page mPage = new Model.Page(pageTitle);
+                if (pageTitle!= null && !pageTitle.isEmpty()) {
+                    Page mPage = new Page(pageTitle);
                     mPage.setChildId(mChildId);
                     long id = mLocalDb.insertPage(mPage, null);
-                    mPage.setId(Long.toString(id));
+                    String pageId = Long.toString(id);
+                    mPage.setId(pageId);
                     Toast.makeText(getApplicationContext(), "Page ajoutée à la base",
                             Toast.LENGTH_SHORT).show();
+                    Intent intentName = new Intent(getBaseContext(), ChoosePictureActivity.class);
+                    intentName.putExtra(EXTRA_PAGE_ID, pageId);
+                    startActivity(intentName);
                     addPageInRecyclerView();
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Erreur d'ajout page", Toast.LENGTH_SHORT).show();
                 }
@@ -161,9 +162,9 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
             //if the user want to cancel the process
             mBuilder.setNegativeButton("Annuler", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "Ajout Annulé", Toast.LENGTH_SHORT).show());
             mBuilder.show();
-
         });
     }
+
 
     private void loadPages(){
         mLocalDb.requestPageByChild(mChildId,new RequestCallback() {
@@ -171,7 +172,7 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
                 for (int i = 0; i < entities.size(); i++) {
-                    mListPages.add((Model.Page) entities.get(i));
+                    mListPages.add((Page) entities.get(i));
                 }
             }
 
@@ -199,6 +200,12 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
     public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.anim_slide_none, R.anim.anim_slide_down);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPages();
     }
 
 }

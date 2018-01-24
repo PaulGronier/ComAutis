@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.paulg.comautis.R;
-import com.example.paulg.comautis.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.Model.Page;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
     private final Context mContext;
     private final OnClickListener mListener;
 
-    private final List<Model.Page> mPages;
+    private final List<Page> mPages;
 
 
-    public PagesAdapter(Context context, List<Model.Page> pages, OnClickListener listener) {
+    public PagesAdapter(Context context, List<Page> pages, OnClickListener listener) {
         mContext = context;
         mListener = listener;
         mPages = pages;
@@ -77,9 +77,9 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindButtons(Model.Page page) {
+        public void bindButtons(Page page) {
             mPagePictureView.setImageResource(R.drawable.ic_page);
-            mPageTitleView.setText(page.getTitle());
+            mPageTitleView.setText(page.getName());
             mModifButtonView.setImageResource(R.drawable.modif);
             mRemoveButtonView.setImageResource(R.drawable.delete);
 

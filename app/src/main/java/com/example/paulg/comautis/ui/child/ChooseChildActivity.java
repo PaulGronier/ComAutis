@@ -21,6 +21,7 @@ import com.example.paulg.comautis.mvp.Database.RequestCallback;
 import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
+import com.example.paulg.comautis.mvp.Model.Page;
 import com.example.paulg.comautis.ui.BaseActivity;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
@@ -76,7 +77,7 @@ public class ChooseChildActivity extends BaseActivity implements AdapterListChil
         mDeleteBuilder.setNegativeButton(R.string.btn_ad_negative,
                 (dialog, which) -> Toast.makeText(getApplicationContext(), "Annulé",
                         Toast.LENGTH_SHORT).show());
-        AlertDialog alertDialogDeleteChild = mDeleteBuilder.show();
+        mDeleteBuilder.show();
     }
     @Override
     public void onItemClick(String childID, String name) {
@@ -113,8 +114,7 @@ public class ChooseChildActivity extends BaseActivity implements AdapterListChil
                     Toast.makeText(getApplicationContext(), "Ajout Annulé", Toast.LENGTH_SHORT).show();
                 }
             });
-
-            AlertDialog alertDialog = mBuilder.show();
+            mBuilder.show();
         });
     }
 
@@ -147,19 +147,4 @@ public class ChooseChildActivity extends BaseActivity implements AdapterListChil
         mChildRecyclerView.setAdapter(mAdapterListChild);
     }
 
-    private int checkPageInChild (String idChildTarget) {
-        List<Model.Page> listPageInChild = new ArrayList<>();
-        mLocalDb.requestPageByChild(idChildTarget, new RequestCallback() {
-            @Override
-            public void onResult(List<? extends Model> entities) {
-                List listPageInChild = (List<Model.Page>) entities;
-            }
-
-            @Override
-            public void onError(Throwable error) {
-
-            }
-        });
-        return listPageInChild.size();
-    }
 }
