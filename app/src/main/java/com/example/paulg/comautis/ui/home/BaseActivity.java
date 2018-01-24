@@ -2,7 +2,6 @@ package com.example.paulg.comautis.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,6 @@ import com.example.paulg.comautis.ui.child.ChooseChildActivity;
 import com.example.paulg.comautis.ui.images.ChooseImagesActivity;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by Cervo on 23/01/2018.
  */
@@ -29,10 +25,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentViewId());
+        setContentView(R.layout.activity_show_pictures);
 
-        navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        navigationView.setOnNavigationItemSelectedListener(this);
+        navigationView = findViewById(R.id.bottom_navigation);
+        //navigationView.setOnNavigationItemSelectedListener(this);
+
+        initMenuListener();
     }
 
     @Override
@@ -77,6 +75,27 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
                 break;
             }
         }
+    }
+
+    public void initMenuListener() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_folder:
+                        Intent intentName = new Intent(getBaseContext(), ChooseImagesActivity.class);
+                        startActivity(intentName);
+                        return true;
+                    case R.id.action_child:
+                        Intent intentChild = new Intent(getBaseContext(), ChooseChildActivity.class);
+                        startActivity(intentChild);
+                        return true;
+                }
+                return true;
+            }
+        });
     }
 
     public abstract int getContentViewId();

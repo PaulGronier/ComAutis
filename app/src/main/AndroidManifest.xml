@@ -9,13 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.child.ChooseChildActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ui.images.ChooseImagesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--<activity android:name=".ui.images.ChooseImagesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
         <activity android:name=".ui.timer.TimerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.page.ChoosePageActivity"></activity>
+        <activity android:name=".ui.child.ChooseChildActivity"></activity>
+
 
     </application>
 
