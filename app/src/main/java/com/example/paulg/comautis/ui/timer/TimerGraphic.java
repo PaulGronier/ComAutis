@@ -55,7 +55,7 @@ public class TimerGraphic {
         return bitmap;
     }
 
-    public Bitmap redrawTimer(Bitmap b, double startAngle){
+    public Bitmap redrawTimer(Bitmap b, float sweepAngle){
 
         canvas = new Canvas(b);
 
@@ -66,8 +66,8 @@ public class TimerGraphic {
 
         // dessin arc externe
         RectF oval = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
-        canvas.drawArc(oval, -90f, (long)(startAngle+(angleForSec*iterator)), true, paint);
-        Log.d("infoPUUTAIN", String.valueOf(startAngle+(angleForSec*iterator)));
+        canvas.drawArc(oval, -90f, sweepAngle, true, paint);
+        //Log.d("infoPUUTAIN", String.valueOf(startAngle+(angleForSec*iterator)));
 
         iterator++;
         return b;

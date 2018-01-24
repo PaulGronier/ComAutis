@@ -84,14 +84,19 @@ public class TimerFragmentTiny extends Fragment {
     }
 
     public void refreshTinyTimer (long milliSeconds) {
+        if (milliSeconds != 0) {
+            //long startAngle = milliSeconds/1000*360/3600;
+            //float floatStartAngle = (float)startAngle;
 
-        double startAngle = milliSeconds*1000*360/3600;
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        //long tempstotal = milliSeconds /1000;
-        //double angleforsec = 360.00 / tempstotal / 2.00;
-        bitmap = timerGraphic.redrawTimer(bitmap,startAngle);
-        image.setImageBitmap(bitmap);
+            float tempsFixe = 3600f * 1000f;
+            float sweepAngle = 360f - ((milliSeconds / tempsFixe) * 360f);
 
+            Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+            //long tempstotal = milliSeconds /1000;
+            //double angleforsec = 360.00 / tempstotal / 2.00;
+            bitmap = timerGraphic.redrawTimer(bitmap,sweepAngle);
+            image.setImageBitmap(bitmap);
+        }
     }
 
     private void startCountDownTimer() {
@@ -103,7 +108,7 @@ public class TimerFragmentTiny extends Fragment {
                 Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
                 long tempstotal = mTimeCountInMilliSeconds /1000;
                 double angleforsec = 360.00 / tempstotal / 2.00;
-                bitmap = timerGraphic.redrawTimer(bitmap,angleforsec);
+                bitmap = timerGraphic.redrawTimer(bitmap,(float)angleforsec);
                 image.setImageBitmap(bitmap);
 
                 //Log.d("INFO", "angle : " + angleforsec);
