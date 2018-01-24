@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_timer_tiny_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.7"
+        android:orientation="vertical" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline1">
+
+    </android.support.v7.widget.RecyclerView>
+
     <ImageView
         android:id="@+id/imageCountdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        tools:background="@color/colorYellow"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="51dp"
         android:textColor="@color/colorYellow"
         android:textSize="40sp"
-        tools:text="20" />
+        tools:text="20"
+        app:layout_constraintTop_toBottomOf="@id/imageCountdown"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

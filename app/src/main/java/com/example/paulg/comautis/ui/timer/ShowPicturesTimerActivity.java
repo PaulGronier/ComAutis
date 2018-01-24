@@ -1,29 +1,34 @@
 package com.example.paulg.comautis.ui.timer;
 
-import android.os.CountDownTimer;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.paulg.comautis.R;
+import com.example.paulg.comautis.ui.BaseActivity;
+import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
-public class TimerActivity extends AppCompatActivity implements TimerFragmentSetup.TimerListener, FragmentNavigator {
+public class ShowPicturesTimerActivity extends BaseActivity implements TimerFragmentSetup.TimerListener, FragmentNavigator {
 
+    private String mPageId;
     private TimerFragmentTiny tinyFragment;
     private TimerFragmentSetup setupTimerFragment;
-    private CountDownTimer countDownTimer;
     private long mTime = 0;
+    private boolean mIsStopped = true;
 
     public void initComponents(){
         setupTimerFragment = new TimerFragmentSetup();
         tinyFragment = new TimerFragmentTiny();
-        getTime(mTime);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+
+        if(getIntent() != null){
+            if(getIntent().getExtras() != null) {
+                mPageId = getIntent().getExtras().getString(ChoosePageActivity.EXTRA_PAGE_ID);
+            }
+        }
         initComponents();
         displayTinyFragment();
     }
@@ -40,9 +45,7 @@ public class TimerActivity extends AppCompatActivity implements TimerFragmentSet
         if (setupTimerFragment.isAdded()) {
             fragmentTransaction.hide(setupTimerFragment);
         }
-
         fragmentTransaction.commit();
-
     }
 
     protected void displaySetupTimerFragment() {
@@ -50,6 +53,7 @@ public class TimerActivity extends AppCompatActivity implements TimerFragmentSet
         if (setupTimerFragment.isAdded()) {
             fragmentTransaction.show(setupTimerFragment);
         } else {
+            fragmentTransaction.addToBackStack("setupFragmentBack");
             fragmentTransaction.add(R.id.my_placeholder, setupTimerFragment);
         }
         if (tinyFragment.isAdded()) {
@@ -59,20 +63,23 @@ public class TimerActivity extends AppCompatActivity implements TimerFragmentSet
     }
 
     @Override
-    public void getTime(long time) {
+    public void getTime(long time, boolean isStoped) {
+        mIsStopped = isStoped;
         mTime = time;
     }
 
     @Override
     public void showSetupTimerFragment() {
         displaySetupTimerFragment();
+        getTime(mTime, mIsStopped);
     }
 
     @Override
     public void showTinyTimerFragment() {
         displayTinyFragment();
             //tinyFragment = (TimerFragmentTiny)getSupportFragmentManager().findFragmentById(R.id.my_placeholder);
-        //tinyFragment.refreshTime(mTime);
-
+        if (mIsStopped) {
+            tinyFragment.refreshTime(mTime);
+        }
     }
 }

@@ -1,21 +1,13 @@
 package com.example.paulg.comautis.ui.timer;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.paulg.comautis.R;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,8 +33,7 @@ public class TimerFragmentTiny extends Fragment {
 
     private FragmentActivity listener;
     private TimerGraphic timerGraphic;
-    private long timeCountInMilliSeconds;
-    private int mTime;
+    private long mTimeCountInMilliSeconds;
 
     @Override
     public void onAttach(Context context) {
@@ -83,20 +72,19 @@ public class TimerFragmentTiny extends Fragment {
     }
 
     public void refreshTime(long time) {
-        timeCountInMilliSeconds = time;
+        mTimeCountInMilliSeconds = time;
         mTimeView.setText(String.valueOf(time));
         startCountDownTimer();
-
     }
 
     private void startCountDownTimer() {
 
-        CountDownTimer countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+        CountDownTimer countDownTimer = new CountDownTimer(mTimeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
                 Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-                long tempstotal = timeCountInMilliSeconds /1000;
+                long tempstotal = mTimeCountInMilliSeconds /1000;
                 double angleforsec = 360.00 / tempstotal / 2.00;
                 bitmap = timerGraphic.redrawTimer(bitmap,angleforsec);
                 image.setImageBitmap(bitmap);

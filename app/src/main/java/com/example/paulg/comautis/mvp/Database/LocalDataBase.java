@@ -11,8 +11,8 @@ import com.example.paulg.comautis.mvp.Database.Table.PageTable;
 import com.example.paulg.comautis.mvp.Database.Table.PictureTable;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Folder;
+import com.example.paulg.comautis.mvp.Model.Model;
 import com.example.paulg.comautis.mvp.Model.Picture;
-import com.example.paulg.comautis.mvp.page.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -261,7 +261,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
     @Override
     public void requestPage(RequestCallback callback) {
         Cursor cursor = mSQLiteDatabase.query(PageTable.TABLE_NAME, null, null, null, null, null, null, null);
-        List<Page> pageList = new ArrayList<>();
+        List<Model.Page> pageList = new ArrayList<>();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 PageTable pageTable = new PageTable();
@@ -279,7 +279,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
     public void requestPageById(String id, RequestCallback callback) {
         if(id != "" && id != null) {
             Cursor cursor = mSQLiteDatabase.query(PageTable.TABLE_NAME, null, PageTable.KEY_ID + "=?", new String[]{id}, null, null, null, null);
-            List<Page> pageList = new ArrayList<>();
+            List<Model.Page> pageList = new ArrayList<>();
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     PageTable pageTable = new PageTable();
@@ -301,7 +301,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
     public void requestPageByName(String name, RequestCallback callback) {
         if(name != "" && name != null) {
             Cursor cursor = mSQLiteDatabase.query(PageTable.TABLE_NAME, null, PageTable.KEY_NAME + "=?", new String[]{name}, null, null, null, null);
-            List<Page> pageList = new ArrayList<>();
+            List<Model.Page> pageList = new ArrayList<>();
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     PageTable pageTable = new PageTable();
@@ -323,7 +323,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
     public void requestPageByChild(String childId, RequestCallback callback) {
         if(childId != "" && childId != null) {
             Cursor cursor = mSQLiteDatabase.query(PageTable.TABLE_NAME, null, PageTable.KEY_CHILD_ID + "=?", new String[]{childId}, null, null, null, null);
-            List<Page> pageList = new ArrayList<>();
+            List<Model.Page> pageList = new ArrayList<>();
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     PageTable pageTable = new PageTable();
@@ -406,7 +406,7 @@ public class LocalDataBase implements LocalDataBaseInterface {
     }
 
     @Override
-    public long insertPage(Page page, RequestCallback callback) {
+    public long insertPage(Model.Page page, RequestCallback callback) {
         long valueReturn = mSQLiteDatabase.insert(PageTable.TABLE_NAME, null, new PageTable().getContentValues(page));
         if (valueReturn != -1){
             //TODO

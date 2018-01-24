@@ -19,10 +19,10 @@ import com.example.paulg.comautis.mvp.Database.RequestCallback;
 import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
-import com.example.paulg.comautis.mvp.page.Page;
 import com.example.paulg.comautis.mvp.page.PagesAdapter;
+import com.example.paulg.comautis.ui.BaseActivity;
 import com.example.paulg.comautis.ui.child.ChooseChildActivity;
-import com.example.paulg.comautis.ui.timer.TimerActivity;
+import com.example.paulg.comautis.ui.timer.ShowPicturesTimerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,9 @@ import butterknife.ButterKnife;
  * Created by paulg on 16/01/2018.
  */
 
-public class ChoosePageActivity extends AppCompatActivity implements PagesAdapter.OnClickListener {
+public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnClickListener {
+
+    public static final String EXTRA_PAGE_ID = "page_id";
 
     @BindView(R.id.lv_pages)
     RecyclerView mListPagesView;
@@ -45,10 +47,8 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
     EditText mEditDialogText;
 
     List<Child> mListChild;
-    private List<Page> mListPages;
+    private List<Model.Page> mListPages;
     private PagesAdapter mPagesAdapter;
-    public SQLDataBase myDB;
-    public LocalDataBase mLocalDb;
     public String mChildId;
     public String mChildName;
 
@@ -63,7 +63,6 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
                 mChildName = getIntent().getExtras().getString(ChooseChildActivity.EXTRA_CHILD_NAME);
             }
         }
-        initDatabase();
         ButterKnife.bind(this);
         init();
         addPageInRecyclerView();
@@ -74,10 +73,10 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
     }
 
     @Override
-    public void onItemClick() {
+    public void onItemClick(String pageId) {
         Toast.makeText(this, "ItemClick", Toast.LENGTH_SHORT).show();
-        Intent intentName = new Intent(getBaseContext(), TimerActivity.class);
-
+        Intent intentName = new Intent(getBaseContext(), ShowPicturesTimerActivity.class);
+        intentName.putExtra(EXTRA_PAGE_ID, pageId);
         startActivity(intentName);
     }
 
@@ -114,13 +113,6 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
 
     }
 
-    private void initDatabase() {
-        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
-        myDB = new SQLDataBase(getApplicationContext());
-        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
-        myDB.onCreate(mComAutisDB);
-        mLocalDb = new LocalDataBase(mComAutisDB,null);
-    }
 
     private void addPageInRecyclerView(){
         mLocalDb.requestPageByChild(mChildId, new RequestCallback() {
@@ -128,7 +120,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
                 for (int i = 0; i < entities.size(); i++) {
-                    mListPages.add((Page) entities.get(i));
+                    mListPages.add((Model.Page) entities.get(i));
                 }
             }
 
@@ -154,7 +146,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
 
                 String pageTitle = mEditDialogText.getText().toString();
                 if (pageTitle != null && !pageTitle.isEmpty()){
-                    Page mPage = new Page(pageTitle);
+                    Model.Page mPage = new Model.Page(pageTitle);
                     mPage.setChildId(mChildId);
                     long id = mLocalDb.insertPage(mPage, null);
                     mPage.setId(Long.toString(id));
@@ -179,7 +171,7 @@ public class ChoosePageActivity extends AppCompatActivity implements PagesAdapte
             public void onResult(List<? extends Model> entities) {
                 mListPages.clear();
                 for (int i = 0; i < entities.size(); i++) {
-                    mListPages.add((Page) entities.get(i));
+                    mListPages.add((Model.Page) entities.get(i));
                 }
             }
 

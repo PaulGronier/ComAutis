@@ -21,7 +21,7 @@ import com.example.paulg.comautis.mvp.Database.RequestCallback;
 import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 import com.example.paulg.comautis.mvp.Model.Child;
 import com.example.paulg.comautis.mvp.Model.Model;
-import com.example.paulg.comautis.mvp.page.Page;
+import com.example.paulg.comautis.ui.BaseActivity;
 import com.example.paulg.comautis.ui.page.ChoosePageActivity;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  * Created by iem on 19/01/2018.
  */
 
-public class ChooseChildActivity extends AppCompatActivity implements AdapterListChild.onClickListenner{
+public class ChooseChildActivity extends BaseActivity implements AdapterListChild.onClickListenner{
 
     public static final String EXTRA_CHILD_ID = "child_id";
     public static final String EXTRA_CHILD_NAME = "child_name";
@@ -45,9 +45,6 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
     AdapterListChild mAdapterListChild;
     EditText editNameChild;
 
-
-    public SQLDataBase myDB;
-    public LocalDataBase mLocalDb;
     private FloatingActionButton floatingActionButton;
 
     @Override
@@ -55,15 +52,12 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_child_add);
         floatingActionButton = findViewById(R.id.add_child);
-        Database();
 
         ButterKnife.bind(this);
 
         init();
         addChildInListView();
         addChildren();
-
-
     }
 
     @Override
@@ -133,14 +127,6 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
     }
 
 
-    private void Database() {
-        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
-        myDB = new SQLDataBase(getApplicationContext());
-        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
-        myDB.onCreate(mComAutisDB);
-        mLocalDb = new LocalDataBase(mComAutisDB,null);
-    }
-
     private void addChildInListView(){
         mLocalDb.requestChild(new RequestCallback() {
             @Override
@@ -162,11 +148,11 @@ public class ChooseChildActivity extends AppCompatActivity implements AdapterLis
     }
 
     private int checkPageInChild (String idChildTarget) {
-        List<Page> listPageInChild = new ArrayList<>();
+        List<Model.Page> listPageInChild = new ArrayList<>();
         mLocalDb.requestPageByChild(idChildTarget, new RequestCallback() {
             @Override
             public void onResult(List<? extends Model> entities) {
-                List listPageInChild = (List<Page>) entities;
+                List listPageInChild = (List<Model.Page>) entities;
             }
 
             @Override

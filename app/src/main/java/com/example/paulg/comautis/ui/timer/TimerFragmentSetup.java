@@ -1,5 +1,6 @@
 package com.example.paulg.comautis.ui.timer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
 
     //private long mTimeCountInMilliSeconds = 60000;
     private long mTimeCountInMilliSeconds;
+    private boolean mIsStopped = true;
 
     private enum TimerStatus {
         STARTED,
@@ -50,7 +52,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
     private int time;
 
     public interface TimerListener {
-        public void getTime(long time);
+        public void getTime(long time, boolean isStopped);
     }
 
     @Override
@@ -134,6 +136,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
      */
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
+            mIsStopped = true;
             // call to initialize the timer values
             setTimerValues();
             // call to initialize the progress bar values
@@ -150,7 +153,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
             startCountDownTimer();
 
         } else {
-
+            mIsStopped = false;
             // hiding the reset icon
             imageViewReset.setVisibility(View.GONE);
             // changing stop icon to start icon
@@ -187,7 +190,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeCountInMilliSeconds = millisUntilFinished;
-                timerListener.getTime(millisUntilFinished);
+                timerListener.getTime(millisUntilFinished, mIsStopped);
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
             }
@@ -233,7 +236,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
      * @return HH:mm:ss time formatted string
      */
     private String hmsTimeFormatter(long milliSeconds) {
-        String hms = String.format("%02d:%02d:%02d",
+        @SuppressLint("DefaultLocale") String hms = String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(milliSeconds),
                 TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
                 TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));

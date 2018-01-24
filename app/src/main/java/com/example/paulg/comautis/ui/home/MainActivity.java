@@ -11,15 +11,14 @@ import android.widget.ListView;
 import com.example.paulg.comautis.R;
 import com.example.paulg.comautis.mvp.Database.LocalDataBase;
 import com.example.paulg.comautis.mvp.Database.SQLDataBase;
+import com.example.paulg.comautis.ui.BaseActivity;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity {
     private ListView navigationView;
     private DrawerLayout fullLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
     private int selectedNavItemId;
-    public SQLDataBase myDB;
-    public LocalDataBase mLocalDb;
 
 
     @Override
@@ -27,13 +26,6 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_child_add);
 
-        SQLiteDatabase mComAutisDB = openOrCreateDatabase("ComAutisDB",MODE_PRIVATE,null);
-
-        myDB = new SQLDataBase(getApplicationContext());
-        myDB.onUpgrade(mComAutisDB, mComAutisDB.getVersion(),myDB.getVERSION());
-        myDB.onCreate(mComAutisDB);
-
-        mLocalDb = new LocalDataBase(mComAutisDB,null);
     }
 
 
