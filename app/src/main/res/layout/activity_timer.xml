@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline1"
@@ -19,11 +20,18 @@
         android:orientation="vertical" />
 
     <FrameLayout
-        android:id="@+id/my_placeholder"
+        android:id="@+id/my_tiny_timer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/my_setup_timer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorYellow"
-      >
+        tools:visibility="gone">
     </FrameLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

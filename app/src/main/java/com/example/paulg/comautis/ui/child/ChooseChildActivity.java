@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -92,9 +93,12 @@ public class ChooseChildActivity extends BaseActivity implements AdapterListChil
             LayoutInflater inflaterAddChildren = getLayoutInflater();
             View dialogAddChild = inflaterAddChildren.inflate(R.layout.dialog_add_child, null);
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(ChooseChildActivity.this);
+            AlertDialog dialog;
             mBuilder.setView(dialogAddChild);
             editNameChild = dialogAddChild.findViewById(R.id.et_add_child_name);
+            editNameChild.requestFocus();
             mBuilder.setPositiveButton("Ok", (dialogInterface, i) -> {
+                hideKeyboard(editNameChild);
                 String nameChild = editNameChild.getText().toString();
                 if (nameChild != null && !nameChild.isEmpty()){
                     Child myChild = new Child();
@@ -111,10 +115,12 @@ public class ChooseChildActivity extends BaseActivity implements AdapterListChil
             mBuilder.setNegativeButton("Annuler", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    hideKeyboard(editNameChild);
                     Toast.makeText(getApplicationContext(), "Ajout Annulé", Toast.LENGTH_SHORT).show();
                 }
             });
             mBuilder.show();
+            openKeyboard();
         });
     }
 

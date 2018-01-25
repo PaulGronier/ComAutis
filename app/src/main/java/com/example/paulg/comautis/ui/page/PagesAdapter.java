@@ -1,4 +1,8 @@
-package com.example.paulg.comautis.mvp.page;
+package com.example.paulg.comautis.ui.page;
+
+/**
+ * Created by paulg on 25/01/2018.
+ */
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by paulg on 17/01/2018.
@@ -53,7 +58,7 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
     }
 
     public interface OnClickListener {
-        void onItemClick(String pageId);
+        void onItemClick(String pageId, String name);
         void onModifClickItem();
         void onRemoveClickItem(String pageId);
     }
@@ -83,9 +88,10 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
             mModifButtonView.setImageResource(R.drawable.modif);
             mRemoveButtonView.setImageResource(R.drawable.delete);
 
-            mView.setOnClickListener(v-> mListener.onItemClick(page.getId()));
+            mView.setOnClickListener(v-> mListener.onItemClick(page.getId(), page.getName()));
             mModifButtonView.setOnClickListener(v -> mListener.onModifClickItem());
             mRemoveButtonView.setOnClickListener(v -> mListener.onRemoveClickItem(page.getId()));
         }
     }
 }
+

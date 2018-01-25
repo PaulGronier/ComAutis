@@ -63,25 +63,21 @@ public class ChoosePictureActivity extends BaseActivity {
         loadGridPictures();
 
         //long click
-        mGridPictures.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!mIsSeleted.get(position)) {
-                    mSelectedBitmap.add(mlistPictures.get(position));
-                    mIsSeleted.set(position, true);
-                    Picture picturePage = new Picture();
-                    picturePage.setName(mlistPictures.get(position).getName());
-                } else {
-                    for (int i = 0; i < mSelectedBitmap.size(); i++) {
-                        if (mlistPictures.get(position).getName().equals(mSelectedBitmap.get(i).getName())) {
-                            mSelectedBitmap.remove(i);
-                        }
+        mGridPictures.setOnItemClickListener((AdapterView.OnItemClickListener) (parent, view, position, id) -> {
+            if (!mIsSeleted.get(position)) {
+                mSelectedBitmap.add(mlistPictures.get(position));
+                mIsSeleted.set(position, true);
+                Picture picturePage = new Picture();
+                picturePage.setName(mlistPictures.get(position).getName());
+            } else {
+                for (int i = 0; i < mSelectedBitmap.size(); i++) {
+                    if (mlistPictures.get(position).getName().equals(mSelectedBitmap.get(i).getName())) {
+                        mSelectedBitmap.remove(i);
                     }
-                    mIsSeleted.set(position, false);
                 }
-                loadGridPictures();
-                return false;
+                mIsSeleted.set(position, false);
             }
+            loadGridPictures();
         });
     }
 
