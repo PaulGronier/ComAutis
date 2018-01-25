@@ -10,9 +10,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.example.paulg.comautis.R;
 import com.example.paulg.comautis.mvp.Model.Picture;
@@ -26,7 +27,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class ChoosePictureActivity extends BaseActivity {
+
+    @BindView(R.id.search_bar) AutoCompleteTextView mSearchBarView;
+    @BindView(R.id.delete_text) ImageView mDeleteTextButtonView;
+    @BindView(R.id.search_text) ImageView mSearchButtonView;
 
     private List<Picture> mlistPictures = new ArrayList<>();
     private String pageId;
@@ -84,6 +92,11 @@ public class ChoosePictureActivity extends BaseActivity {
     public void loadGridPictures(){
         GridPicturesAdapter gridPicturesAdapter = new GridPicturesAdapter(mlistPictures, mIsSeleted, getBaseContext());
         mGridPictures.setAdapter(gridPicturesAdapter);
+    }
+
+    @OnClick(R.id.search_text)
+    public void onSearchTextClick() {
+
     }
 
     @Override

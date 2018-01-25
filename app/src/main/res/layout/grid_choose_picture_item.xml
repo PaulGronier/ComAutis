@@ -16,7 +16,7 @@
         android:id="@+id/selected_pictures"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_reset"
+        android:src="@drawable/ic_validate"
         android:tint="@color/black"
         android:layout_toEndOf="@+id/grid_item_name"
         android:layout_below="@+id/grid_item_image"
