@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import com.example.paulg.comautis.mvp.Database.LocalDataBase;
 import com.example.paulg.comautis.mvp.Database.SQLDataBase;
 
+import java.util.Objects;
+
 /**
  * Created by paulg on 24/01/2018.
  */
@@ -43,5 +45,9 @@ public class BaseActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             view.clearFocus();
         }
+    }
+
+    public static boolean isNullOrEmpty(CharSequence value) {
+        return Objects.equals(null, value) || value.length() == 0;
     }
 }

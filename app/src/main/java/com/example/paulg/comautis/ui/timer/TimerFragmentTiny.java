@@ -68,6 +68,7 @@ public class TimerFragmentTiny extends Fragment implements RecyclerPictureAdapte
         timerGraphic = new TimerGraphic();
         Bitmap b = timerGraphic.getInitialTimer();
         imageCountDownView.setImageBitmap(b);
+        imageCountDownView.bringToFront();
     }
 
     public void initRecyclerView() {

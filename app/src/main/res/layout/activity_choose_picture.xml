@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.paulg.comautis.ui.picture.ChoosePictureActivity">
 
     <LinearLayout
@@ -19,14 +20,25 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Titre de l'image"/>
+            android:hint="Titre de l'image"
+            android:visibility="gone"/>
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Search.."            >
+        </SearchView>
 
         <ImageView
             android:id="@+id/delete_text"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/ic_delete"/>
+            android:src="@drawable/ic_delete"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/search_text"

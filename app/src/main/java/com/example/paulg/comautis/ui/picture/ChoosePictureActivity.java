@@ -10,10 +10,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.paulg.comautis.R;
 import com.example.paulg.comautis.mvp.Model.Picture;
@@ -26,9 +30,13 @@ import com.example.paulg.comautis.ui.page.PageActivity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.OnTextChanged;
 
 public class ChoosePictureActivity extends BaseActivity {
 
@@ -36,18 +44,27 @@ public class ChoosePictureActivity extends BaseActivity {
     @BindView(R.id.delete_text) ImageView mDeleteTextButtonView;
     @BindView(R.id.search_text) ImageView mSearchButtonView;
 
+    private SearchView mSearchView;
+
     private List<Picture> mlistPictures = new ArrayList<>();
     private String pageId;
     private GridView mGridPictures;
+    private GridPicturesAdapter mGridPicturesAdapter;
+    private GridPicturesAdapter mGridSearchedPicturesAdapter;
     private List<Picture> mSelectedBitmap = new ArrayList<>();
     private List<Boolean> mIsSeleted = new ArrayList<>();
+    private List<Picture> mSearchedPictures = new ArrayList<>();
+    private List<Boolean> mIsSearchedSeleted = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_picture);
+        ButterKnife.bind(this);
 
         getSupportActionBar().setTitle("Images de ");
+        mSearchView = (SearchView) findViewById(R.id.search);
 
         if (getIntent()!=null){
             pageId = getIntent().getStringExtra(ChoosePageActivity.EXTRA_PAGE_ID);
@@ -87,16 +104,66 @@ public class ChoosePictureActivity extends BaseActivity {
             }
             loadGridPictures();
         });
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mGridPicturesAdapter.getFilter().filter(query);
+                mGridPicturesAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
     }
 
     public void loadGridPictures(){
-        GridPicturesAdapter gridPicturesAdapter = new GridPicturesAdapter(mlistPictures, mIsSeleted, getBaseContext());
-        mGridPictures.setAdapter(gridPicturesAdapter);
+        mGridPicturesAdapter = new GridPicturesAdapter(mlistPictures, mIsSeleted, getBaseContext());
+        mGridPictures.setAdapter(mGridPicturesAdapter);
     }
 
     @OnClick(R.id.search_text)
     public void onSearchTextClick() {
+        onActionDoneSearchStore(EditorInfo.IME_ACTION_DONE);
+    }
 
+    @OnClick(R.id.delete_text)
+    public void onDeleteTextClick() {
+        mSearchBarView.setText("");
+        mGridPictures.setAdapter(mGridPicturesAdapter);
+        Toast.makeText(getApplicationContext(), "Champs vidé", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @OnTextChanged(R.id.search_bar)
+    public void onSearchTextChanged() {
+        if (isNullOrEmpty(mSearchBarView.getText().toString())) mDeleteTextButtonView.setVisibility(View.GONE);
+        else mDeleteTextButtonView.setVisibility(View.VISIBLE);
+
+        mGridPicturesAdapter.getFilter().filter(mSearchBarView.getText().toString());
+        mGridPicturesAdapter.notifyDataSetChanged();
+    }
+
+    @OnEditorAction(R.id.search_bar)
+    protected boolean onActionDoneSearchStore(int actionId) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            hideKeyboard(mSearchBarView);
+            /*mSearchedPictures.clear();
+            for (Picture picture:mlistPictures) {
+                if (picture.getName().contains(mSearchBarView.getText().toString())){
+                    mSearchedPictures.add(picture);
+                }
+            }
+            mGridSearchedPicturesAdapter = new GridPicturesAdapter(mSearchedPictures, mIsSeleted, getBaseContext());
+            mGridPictures.setAdapter(mGridSearchedPicturesAdapter);*/
+            mGridPicturesAdapter.getFilter().filter(mSearchBarView.getText());
+            mGridPicturesAdapter.notifyDataSetChanged();
+
+            return true;
+        } else return false;
     }
 
     @Override
