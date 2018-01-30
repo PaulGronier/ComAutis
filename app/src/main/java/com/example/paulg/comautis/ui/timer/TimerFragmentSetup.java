@@ -67,6 +67,7 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timer_setup, parent, false);
         ButterKnife.bind(this, view);
+
         return view;
     }
 
@@ -176,6 +177,9 @@ public class TimerFragmentSetup extends Fragment implements View.OnClickListener
         } else {
             // toast message to fill edit text
             Toast.makeText(getActivity(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+        }
+        if (time>60) {
+            time = 60;
         }
         // assigning values after converting to milliseconds
         mTimeCountInMilliSeconds = time * 60 * 1000;

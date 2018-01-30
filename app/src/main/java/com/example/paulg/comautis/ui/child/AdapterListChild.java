@@ -64,7 +64,6 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
         @BindView(R.id.child_pic) ImageView childPic;
         @BindView(R.id.tv_child_name) TextView childName;
         @BindView(R.id.deleteButton) ImageView deleteButton;
-        @BindView(R.id.modif_button) ImageView modifButton;
         View mView;
 
         public ChildHolder(View itemView) {
@@ -78,7 +77,6 @@ public class AdapterListChild extends RecyclerView.Adapter<AdapterListChild.Chil
             childPic.setImageResource(R.drawable.child_face);
             childName.setText(mChild.getName());
             deleteButton.setImageResource(R.drawable.delete);
-            modifButton.setImageResource(R.drawable.modif);
 
             mView.setOnClickListener(view -> mListener.onItemClick(mChild.getId(), mChild.getName()));
             deleteButton.setOnClickListener(view -> mListener.onRemoveClickItem(mChild.getId()));

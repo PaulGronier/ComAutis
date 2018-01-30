@@ -59,7 +59,6 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
 
     public interface OnClickListener {
         void onItemClick(String pageId, String name);
-        void onModifClickItem();
         void onRemoveClickItem(String pageId);
     }
 
@@ -69,8 +68,7 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
         ImageView mPagePictureView;
         @BindView(R.id.page_title)
         TextView mPageTitleView;
-        @BindView(R.id.modif_button)
-        ImageView mModifButtonView;
+
         @BindView(R.id.remove_button)
         ImageView mRemoveButtonView;
 
@@ -85,11 +83,9 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.PagesHolder>
         public void bindButtons(Page page) {
             mPagePictureView.setImageResource(R.drawable.ic_page);
             mPageTitleView.setText(page.getName());
-            mModifButtonView.setImageResource(R.drawable.modif);
             mRemoveButtonView.setImageResource(R.drawable.delete);
 
             mView.setOnClickListener(v-> mListener.onItemClick(page.getId(), page.getName()));
-            mModifButtonView.setOnClickListener(v -> mListener.onModifClickItem());
             mRemoveButtonView.setOnClickListener(v -> mListener.onRemoveClickItem(page.getId()));
         }
     }

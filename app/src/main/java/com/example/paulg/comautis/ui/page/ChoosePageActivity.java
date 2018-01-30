@@ -77,16 +77,10 @@ public class ChoosePageActivity extends BaseActivity implements PagesAdapter.OnC
 
     @Override
     public void onItemClick(String pageId, String name) {
-        Toast.makeText(this, "ItemClick", Toast.LENGTH_SHORT).show();
         Intent intentName = new Intent(getBaseContext(), ShowPicturesTimerActivity.class);
         intentName.putExtra(EXTRA_PAGE_ID, pageId);
         intentName.putExtra(EXTRA_PAGE_NAME, name);
         startActivity(intentName);
-    }
-
-    @Override
-    public void onModifClickItem() {
-        Toast.makeText(this, "Modification", Toast.LENGTH_SHORT).show();
     }
 
     @Override

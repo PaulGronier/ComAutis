@@ -27,8 +27,7 @@
         android:text="NomDeLEnfant"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/modif_button"
-        app:layout_constraintEnd_toStartOf="@+id/modif_button"
+        app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/child_pic"
         app:layout_constraintTop_toTopOf="@+id/deleteButton"
@@ -44,14 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/modif_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/modif"
-        app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
-        app:layout_constraintRight_toLeftOf="@+id/deleteButton" />
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -69,6 +69,6 @@
         android:layout_below="@+id/progressBarCircle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_start" />
+        android:src="@drawable/ic_start"/>
 
 </RelativeLayout>
