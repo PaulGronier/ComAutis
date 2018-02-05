@@ -15,7 +15,6 @@ Il vous suffit de créer un dossier nommé "comAutis" à la racine de votre tél
 
 ## Contributing
 
-M. Jean-Phillipe Farrugia
-M. Buathier Lionel
-M. Tavek François
-
+M. Jean-Phillipe Farrugia ; 
+M. Buathier Lionel ;
+M. Tavel François
