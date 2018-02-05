@@ -114,7 +114,7 @@ public class ChoosePictureActivity extends BaseActivity {
             @Override
             public boolean onQueryTextChange(String query) {
                 mGridPicturesAdapter.getFilter().filter(query);
-                mGridPicturesAdapter.notifyDataSetChanged();
+                mGridPictures.setAdapter(mGridPicturesAdapter);
                 return false;
             }
         });
@@ -144,23 +144,24 @@ public class ChoosePictureActivity extends BaseActivity {
         else mDeleteTextButtonView.setVisibility(View.VISIBLE);
 
         mGridPicturesAdapter.getFilter().filter(mSearchBarView.getText().toString());
-        mGridPicturesAdapter.notifyDataSetChanged();
+        mGridPictures.setAdapter(mGridPicturesAdapter);
     }
 
     @OnEditorAction(R.id.search_bar)
     protected boolean onActionDoneSearchStore(int actionId) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             hideKeyboard(mSearchBarView);
-            /*mSearchedPictures.clear();
+            mSearchedPictures.clear();
             for (Picture picture:mlistPictures) {
                 if (picture.getName().contains(mSearchBarView.getText().toString())){
                     mSearchedPictures.add(picture);
                 }
             }
             mGridSearchedPicturesAdapter = new GridPicturesAdapter(mSearchedPictures, mIsSeleted, getBaseContext());
-            mGridPictures.setAdapter(mGridSearchedPicturesAdapter);*/
             mGridPicturesAdapter.getFilter().filter(mSearchBarView.getText());
             mGridPicturesAdapter.notifyDataSetChanged();
+            mGridPictures.setAdapter(mGridSearchedPicturesAdapter);
+
 
             return true;
         } else return false;
